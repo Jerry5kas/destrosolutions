@@ -63,17 +63,17 @@
         {
           title: 'Structura',
           subtitle: 'Lorem ipsum dolor sit amet consectetur adipiscing elit...',
-          bg: '{{ asset("images/carbgw1.jpg") }}'
+          bg: '{{ asset("images/car1.jpg") }}'
         },
         {
           title: 'Innovation',
           subtitle: 'Technology meets design with smart architecture...',
-          bg: '{{ asset("images/carbgw2.jpg") }}'
+          bg: '{{ asset("images/car2.jpg") }}'
         },
         {
           title: 'Efficiency',
           subtitle: 'Maximizing productivity through structural excellence...',
-          bg: '{{ asset("images/carbfw3.jpg") }}'
+          bg: '{{ asset("images/car3.jpg") }}'
         }
       ],
       interval: null,

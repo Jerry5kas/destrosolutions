@@ -1,7 +1,7 @@
 <!-- Slides Loop -->
 <div class="w-full">
     <div
-        class="w-full h-full flex items-center justify-center relative "
+        class="w-full h-full flex items-center justify-center relative border-b border-gray-300"
     >
         <!-- White overlay -->
         {{--        <div class="absolute inset-0 bg-white/75 backdrop-blur-[1px] z-0"></div>--}}
@@ -67,7 +67,6 @@
                                                 {{ $member['description'] }}
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <!-- Social Icons Panel -->

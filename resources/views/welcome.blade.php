@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-layouts.master>
     <div>
         <x-partials.hero/>
         <x-partials.about />
@@ -30,9 +30,9 @@
         <x-partials.faq />
         <x-partials.news />
         <x-partials.team />
-
+        <x-partials.footer />
 
     </div>
-</x-layouts.app>
+</x-layouts.master>
 
 

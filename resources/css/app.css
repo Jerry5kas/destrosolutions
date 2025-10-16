@@ -17,3 +17,51 @@
   --font-roboto-slab: 'Roboto Slab', ui-serif, Georgia, serif;
   --font-catamaran: 'Catamaran', ui-sans-serif, system-ui, sans-serif;
 }
+
+@utility btn-primary {
+  @apply inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2.5 text-white hover:bg-blue-500 transition;
+}
+
+@layer base {
+  html { font-family: var(--font-inter); }
+  h1,h2,h3,h4,h5,h6 { font-family: var(--font-roboto-slab); }
+}
+
+@utility input-field {
+  @apply w-full rounded-md border border-gray-300 bg-white text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5;
+}
+
+@utility textarea-field {
+  @apply w-full rounded-md border border-gray-300 bg-white text-gray-700 placeholder-gray-400 focus:border-blue-500 focus:ring-blue-500 px-3 py-2.5 resize-y;
+}
+
+@utility input-error {
+  @apply border-red-300 focus:border-red-500 focus:ring-red-500;
+}
+
+@utility drag-zone {
+  @apply border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors;
+}
+
+@utility skeleton {
+  @apply animate-pulse bg-gray-200 rounded;
+}
+
+@utility skeleton-text {
+  @apply animate-pulse bg-gray-200 rounded h-4;
+}
+
+@utility skeleton-avatar {
+  @apply animate-pulse bg-gray-200 rounded-full;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+@utility shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
