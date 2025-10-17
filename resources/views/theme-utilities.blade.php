@@ -1,4 +1,4 @@
-<x-layouts.master>
+<x-layouts.app>
     <div>
          <!-- Font Showcase -->
          <div class="max-w-4xl mx-auto p-8 space-y-8">

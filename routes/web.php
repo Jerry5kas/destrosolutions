@@ -12,6 +12,10 @@ Route::get('/theme-utilities', function () {
     return view('theme-utilities');
 });
 
+Route::get('/page', function (){
+    return view('page');
+});
+
 // Admin Auth Routes
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('guest:admin')->group(function () {

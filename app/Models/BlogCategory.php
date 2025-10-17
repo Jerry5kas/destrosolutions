@@ -10,12 +10,17 @@ class BlogCategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'slug', 'is_active'
+        'name', 'slug', 'description', 'is_active'
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(BlogPost::class, 'category_id');
+    }
 }
 
 

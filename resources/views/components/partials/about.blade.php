@@ -1,8 +1,8 @@
 <div >
-    <div class="py-8 pt-12 md:pt-16 flex flex-col justify-center items-center gap-y-4 md:gap-y-6 px-4">
-        <h1 class="font-roboto-slab font-semibold text-2xl sm:text-3xl">About Us</h1>
-        <span class="w-10 border border-b "></span>
-        <span class="max-w-5xl text-sm sm:text-base md:text-lg mx-auto text-justify sm:text-center text-gray-400">
+    <div class="py-6 xs:py-8 sm:pt-10 md:pt-12 lg:pt-16 flex flex-col justify-center items-center gap-y-3 xs:gap-y-4 sm:gap-y-5 md:gap-y-6 px-3 xs:px-4 sm:px-6">
+        <h1 class="font-roboto-slab font-semibold text-xl xs:text-2xl sm:text-3xl md:text-4xl text-center">About Us</h1>
+        <span class="w-8 xs:w-10 border border-b "></span>
+        <span class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl mx-auto text-justify sm:text-center text-gray-400 leading-relaxed px-2">
                 At DestroSolutions, we enable the future of mobility by driving the transition to Software-Defined
                 Vehicles (SDVs). Our expertise spans end-to-end automotive cybersecurity, software update management,
                 functional safety, and E/E architecture transformation. Our commitment to Safety & security standards,
@@ -11,9 +11,9 @@
     </div>
 
 
-    <div x-data="{ activeTab: 'automotive' }" class="text-sm text-center max-w-6xl mx-auto px-4">
+    <div x-data="{ activeTab: 'automotive' }" class="text-xs xs:text-sm text-center max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto px-3 xs:px-4 sm:px-6">
         {{-- tab-header --}}
-        <div class="flex flex-row justify-center items-center space-x-4 sm:space-x-8 md:space-x-12 lg:space-x-16 py-6 overflow-x-auto">
+        <div class="flex flex-row justify-center items-center space-x-2 xs:space-x-3 sm:space-x-4 md:space-x-6 lg:space-x-8 xl:space-x-12 py-4 xs:py-5 sm:py-6 overflow-x-auto scrollbar-hide">
             <!-- Automotive -->
             <div
                 @click="activeTab = 'automotive'"
@@ -185,8 +185,8 @@
         </div>
 
         {{-- tab-content --}}
-        <div class="mt-6">
-            <div x-show="activeTab === 'automotive'" x-transition class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-16">
+        <div class="mt-4 xs:mt-5 sm:mt-6">
+            <div x-show="activeTab === 'automotive'" x-transition class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-5 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-16 px-2 xs:px-3 sm:px-4">
                 <x-partials.card1/>
                 <x-partials.card1/>
                 <x-partials.card1/>
@@ -194,14 +194,14 @@
                 <x-partials.card1/>
                 <x-partials.card1/>
             </div>
-            <div x-show="activeTab === 'sdv'" x-transition class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-16">
+            <div x-show="activeTab === 'sdv'" x-transition class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-5 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-16 px-2 xs:px-3 sm:px-4">
                 <x-partials.card1/>
                 <x-partials.card1/>
                 <x-partials.card1/>
                 <x-partials.card1/>
                 <x-partials.card1/>
             </div>
-            <div x-show="activeTab === 'avionics'" x-transition class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-16">
+            <div x-show="activeTab === 'avionics'" x-transition class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-5 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-16 px-2 xs:px-3 sm:px-4">
                 <x-partials.card1/>
                 <x-partials.card1/>
                 <x-partials.card1/>
@@ -209,14 +209,14 @@
                 <x-partials.card1/>
                 <x-partials.card1/>
             </div>
-            <div x-show="activeTab === 'railways'" x-transition class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-16">
+            <div x-show="activeTab === 'railways'" x-transition class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-5 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-16 px-2 xs:px-3 sm:px-4">
                 <x-partials.card1/>
                 <x-partials.card1/>
                 <x-partials.card1/>
                 <x-partials.card1/>
                 <x-partials.card1/>
             </div>
-            <div x-show="activeTab === 'healthcare'" x-transition class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-16">
+            <div x-show="activeTab === 'healthcare'" x-transition class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-5 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-16 px-2 xs:px-3 sm:px-4">
                 <x-partials.card1/>
                 <x-partials.card1/>
                 <x-partials.card1/>

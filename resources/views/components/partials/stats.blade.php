@@ -21,15 +21,15 @@
         }
     }"
     x-init="start()"
-    class="text-center w-full space-y-2 sm:space-y-3 md:space-y-4 {{ $border }}"
+    class="text-center w-full space-y-1 xs:space-y-2 sm:space-y-3 md:space-y-4 {{ $border }}"
 >
     <!-- Animated Count -->
-    <div class="font-inter text-2xl sm:text-3xl md:text-4xl font-semibold">
+    <div class="font-inter text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
         <span x-text="count"></span>+<span> {{ $text }}</span>
     </div>
 
     <!-- Tag -->
-    <div class="w-4/5 sm:w-2/3 mx-auto text-gray-600 text-xs sm:text-sm">
+    <div class="w-5/6 xs:w-4/5 sm:w-3/4 md:w-2/3 mx-auto text-gray-600 text-xs xs:text-sm sm:text-sm md:text-base leading-relaxed px-1">
         {{ $tag }}
     </div>
 </div>

@@ -2,7 +2,7 @@
 <section
   x-data="carousel"
   x-init="start()"
-  class="relative w-full h-[28rem] sm:h-[35rem] md:h-[40rem] overflow-hidden border border-b border-gray-300"
+  class="relative w-full h-[24rem] xs:h-[28rem] sm:h-[35rem] md:h-[40rem] lg:h-[45rem] overflow-hidden border border-b border-gray-300"
 >
   <!-- Slides Wrapper -->
   <div
@@ -29,10 +29,10 @@
         </div>
 
         <!-- Content -->
-        <div class="relative z-20 max-w-3xl mx-auto px-4 sm:px-6 text-black flex flex-col justify-center items-center gap-y-4 sm:gap-y-6 md:gap-y-8">
-          <h1 x-text="slide.title" class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold font-sans"></h1>
-          <p x-text="slide.subtitle" class="text-gray-700 text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl"></p>
-          <button class="bg-black text-white font-semibold max-w-max py-2 px-5 sm:py-3 sm:px-6 hover:bg-gray-800 transition text-sm sm:text-base">
+        <div class="relative z-20 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto px-3 xs:px-4 sm:px-6 md:px-8 text-black flex flex-col justify-center items-center gap-y-3 xs:gap-y-4 sm:gap-y-6 md:gap-y-8">
+          <h1 x-text="slide.title" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold font-sans leading-tight text-center"></h1>
+          <p x-text="slide.subtitle" class="text-gray-700 text-xs xs:text-sm sm:text-sm md:text-base lg:text-lg leading-relaxed max-w-xs xs:max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl text-center px-2"></p>
+          <button class="bg-black text-white font-semibold max-w-max py-2 px-4 xs:py-2 xs:px-5 sm:py-3 sm:px-6 md:py-3 md:px-7 hover:bg-gray-800 transition-colors duration-300 text-xs xs:text-sm sm:text-sm md:text-base rounded-sm">
             Become elite
           </button>
         </div>
@@ -41,14 +41,14 @@
   </div>
 
   <!-- Dot Indicators -->
-  <div class="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 z-30 flex space-x-2">
+  <div class="absolute bottom-3 xs:bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 z-30 flex space-x-1 xs:space-x-2">
     <template x-for="(slide, i) in slides" :key="i">
       <div
         :class="{
           'bg-black/70': currentIndex === i,
           'bg-gray-400': currentIndex !== i
         }"
-        class="w-2 h-2 rounded-full transition-all duration-300"
+        class="w-1.5 xs:w-2 h-1.5 xs:h-2 rounded-full transition-all duration-300"
       ></div>
     </template>
   </div>

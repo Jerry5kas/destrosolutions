@@ -22,27 +22,34 @@ class BannerController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title' => ['required','string','max:255'],
-            'slogan' => ['nullable','string','max:255'],
-            'description' => ['nullable','string'],
-            'page' => ['required','string','max:255'],
-            'text1' => ['nullable','string','max:255'],
-            'text2' => ['nullable','string','max:255'],
-            'text3' => ['nullable','string','max:255'],
-            'is_active' => ['nullable','boolean'],
-            'image' => ['nullable','image'],
-        ]);
+        try {
+            $data = $request->validate([
+                'title' => ['required','string','max:255'],
+                'slogan' => ['nullable','string','max:255'],
+                'description' => ['nullable','string'],
+                'page' => ['required','string','max:255'],
+                'text1' => ['nullable','string','max:255'],
+                'text2' => ['nullable','string','max:255'],
+                'text3' => ['nullable','string','max:255'],
+                'is_active' => ['nullable','boolean'],
+                'image' => ['nullable','image'],
+            ]);
 
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('uploads/banners', 'public');
+            if ($request->hasFile('image')) {
+                $data['image'] = $request->file('image')->store('uploads/banners', 'public');
+            } else {
+                $data['image'] = null;
+            }
+
+            $data['is_active'] = (bool)($data['is_active'] ?? false);
+
+            Banner::create($data);
+
+            return redirect()->route('admin.banners.index')->with('status', 'Banner created');
+        } catch (\Exception $e) {
+            \Log::error('Banner creation failed: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['error' => 'Failed to create banner: ' . $e->getMessage()])->withInput();
         }
-
-        $data['is_active'] = (bool)($data['is_active'] ?? false);
-
-        Banner::create($data);
-
-        return redirect()->route('admin.banners.index')->with('status', 'Banner created');
     }
 
     public function edit(Banner $banner)
@@ -70,6 +77,9 @@ class BannerController extends Controller
                 Storage::disk('public')->delete($banner->image);
             }
             $data['image'] = $path;
+        } else {
+            // Keep existing image if no new image uploaded
+            unset($data['image']);
         }
 
         $data['is_active'] = (bool)($data['is_active'] ?? false);

@@ -25,11 +25,11 @@ class ServiceController extends Controller
         $data = $request->validate([
             'title' => ['required','string','max:255'],
             'description' => ['nullable','string'],
-            'key_features' => ['nullable','string'],
+            'key_features' => ['nullable','array'],
+            'key_features.*' => ['nullable','string','max:255'],
             'image' => ['nullable','image'],
             'is_active' => ['nullable','boolean'],
         ]);
-        $data['key_features'] = $this->linesToArray($data['key_features'] ?? '');
         $data['is_active'] = (bool)($data['is_active'] ?? false);
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('uploads/services', 'public');
@@ -48,11 +48,11 @@ class ServiceController extends Controller
         $data = $request->validate([
             'title' => ['required','string','max:255'],
             'description' => ['nullable','string'],
-            'key_features' => ['nullable','string'],
+            'key_features' => ['nullable','array'],
+            'key_features.*' => ['nullable','string','max:255'],
             'image' => ['nullable','image'],
             'is_active' => ['nullable','boolean'],
         ]);
-        $data['key_features'] = $this->linesToArray($data['key_features'] ?? '');
         $data['is_active'] = (bool)($data['is_active'] ?? false);
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('uploads/services', 'public');
@@ -71,10 +71,6 @@ class ServiceController extends Controller
         return redirect()->route('admin.services.index')->with('status', 'Deleted');
     }
 
-    private function linesToArray(string $text): array
-    {
-        return collect(preg_split("/(\r\n|\r|\n)/", trim($text)))->filter()->values()->all();
-    }
 }
 
 

@@ -26,6 +26,7 @@ class TrainingController extends Controller
             'title' => ['required','string','max:255'],
             'description' => ['nullable','string'],
             'objectives' => ['nullable','array'],
+            'objectives.*' => ['nullable','string','max:255'],
             'image' => ['nullable','image'],
             'is_active' => ['nullable','boolean'],
         ]);
@@ -48,6 +49,7 @@ class TrainingController extends Controller
             'title' => ['required','string','max:255'],
             'description' => ['nullable','string'],
             'objectives' => ['nullable','array'],
+            'objectives.*' => ['nullable','string','max:255'],
             'image' => ['nullable','image'],
             'is_active' => ['nullable','boolean'],
         ]);

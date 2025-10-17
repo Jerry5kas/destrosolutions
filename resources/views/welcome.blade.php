@@ -1,21 +1,20 @@
-<x-layouts.master>
+<x-layouts.app>
     <div>
         <x-partials.hero/>
         <x-partials.about />
-        <div class="border border-t border-b border-gray-300 py-8 md:py-20 my-8 md:my-20 ">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-6 max-w-6xl mx-auto h-full px-4">
+        <div class="border border-t border-b border-gray-300 py-6 xs:py-8 sm:py-10 md:py-16 lg:py-20 my-6 xs:my-8 sm:my-10 md:my-16 lg:my-20">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 xs:gap-6 sm:gap-8 md:gap-6 lg:gap-8 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto h-full px-3 xs:px-4 sm:px-6">
                 <div class="w-full md:w-auto">
                     <x-partials.stats count="50+" text="Deployements" tag="Vehicle innovations now come from software-based features" />
                 </div>
 
-                <span class="w-24 border-b md:w-0 md:h-24 md:border-b-0 md:border-r border-gray-300"></span>
+                <span class="w-16 xs:w-20 sm:w-24 border-b md:w-0 md:h-16 lg:h-20 xl:h-24 md:border-b-0 md:border-r border-gray-300"></span>
 
                 <div class="w-full md:w-auto">
                     <x-partials.stats count="100% "  text="Efficiency Boost" tag="SDV Transformation" />
                 </div>
 
-                <span class="w-24 border-b md:w-0 md:h-24 md:border-b-0 md:border-r border-gray-300"></span>
-
+                <span class="w-16 xs:w-20 sm:w-24 border-b md:w-0 md:h-16 lg:h-20 xl:h-24 md:border-b-0 md:border-r border-gray-300"></span>
 
                 <div class="w-full md:w-auto">
                     <x-partials.stats count="100+" text="Man Years" tag="Expertise in developing next-generation vehicle solutions" />
@@ -30,9 +29,8 @@
         <x-partials.faq />
         <x-partials.news />
         <x-partials.team />
-        <x-partials.footer />
 
     </div>
-</x-layouts.master>
+</x-layouts.app>
 
 

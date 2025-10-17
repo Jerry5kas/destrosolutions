@@ -1,5 +1,3 @@
 <x-layouts.app>
-<div>
-
-</div>
+    <x-quantom.hero />
 </x-layouts.app>
