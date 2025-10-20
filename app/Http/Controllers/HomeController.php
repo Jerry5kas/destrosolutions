@@ -28,7 +28,6 @@ class HomeController extends Controller
             $slides = [
                 ['title' => 'Structura', 'subtitle' => 'Lorem ipsum dolor sit amet consectetur adipiscing elit...', 'bg' => asset('images/car1.jpg')],
                 ['title' => 'Innovation', 'subtitle' => 'Technology meets design with smart architecture...', 'bg' => asset('images/car2.jpg')],
-                ['title' => 'Efficiency', 'subtitle' => 'Maximizing productivity through structural excellence...', 'bg' => asset('images/car3.jpg')]
             ];
         }
 
