@@ -114,24 +114,36 @@
                         >
                             <div class="grid grid-cols-1 gap-6">
                                 <div class="space-y-3">
-                                    <h4 class="text-sm font-semibold text-gray-800">Engineering Services</h4>
+                                    <h4 class="text-sm font-semibold text-gray-800">Services</h4>
                                     <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3L3 9.75v10.5h10.5L21 14.25V3H9.75z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 13l2-2 4 4 8-8 2 2-10 10z"/>
                                         </svg>
-                                        ECU Development
+                                        Automative
                                     </a>
                                     <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m4 0h-1V7h-1m-4 9H8v-2H6m12 2h-2v-2h-2"/>
                                         </svg>
-                                        AI Integration
+                                        SDV
                                     </a>
                                     <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.5 21l7.5-9-7.5-9-1.5 9 1.5 9z"/>
                                         </svg>
-                                        Software Validation
+                                        avionics
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12h18M6 8h12M4 16h16"/>
+                                        </svg>
+                                        railways
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 1.343-3 3v1H7l1 7h8l1-7h-2v-1c0-1.657-1.343-3-3-3z"/>
+                                        </svg>
+                                        Health Car and Medical services
                                     </a>
                                 </div>
                             </div>
@@ -153,18 +165,30 @@
                         >
                             <div class="grid grid-cols-1 gap-6">
                                 <div class="space-y-3">
-                                    <h4 class="text-sm font-semibold text-gray-800">Vehicle Platforms</h4>
+                                    <h4 class="text-sm font-semibold text-gray-800">Products</h4>
                                     <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4-4" />
-                                        </svg>
-                                        SDV Core Framework
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9l2 2-2 2-2-2 2-2zm-6 8h12M6 7h12M6 11h12"/></svg>
+                                        Automator AI
                                     </a>
                                     <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <circle cx="12" cy="12" r="9" stroke-width="2" />
-                                        </svg>
-                                        Real-Time Diagnostics
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3z"/><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                                        IDPS
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h10"/></svg>
+                                        AI Data Collector
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+                                        SBOM (Software Bill of Materials)
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 1 1-9-9"/><path d="M21 3v6h-6"/></svg>
+                                        Vehicle Security Operation Center (vSOC)
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16v-4m0 0V8m0 4h4m-4 0H8"/><path d="M3 15a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V9a4 4 0 0 0-4-4H12l-2-2H7a4 4 0 0 0-4 4z"/></svg>
+                                        OTA Updater
                                     </a>
                                 </div>
                             </div>
@@ -186,18 +210,10 @@
                         >
                             <div class="grid grid-cols-1 gap-6">
                                 <div class="space-y-3">
-                                    <h4 class="text-sm font-semibold text-gray-800">Courses</h4>
+                                    <h4 class="text-sm font-semibold text-gray-800">Training</h4>
                                     <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l9-5-9-5-9 5 9 5z" />
-                                        </svg>
-                                        SDV Bootcamp
-                                    </a>
-                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <circle cx="12" cy="12" r="9" stroke-width="2" />
-                                        </svg>
-                                        AI for Automotive
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12l5-5 5 5M5 12v7h10v-7"/></svg>
+                                        Automative
                                     </a>
                                 </div>
                             </div>
@@ -248,14 +264,12 @@
                     </svg>
                 </button>
                 <div x-show="open" x-cloak x-transition class="pl-3 space-y-1">
-                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600">
-                        <svg class="w-4 h-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4-4" /></svg>
-                        SDV Core Framework
-                    </a>
-                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600">
-                        <svg class="w-4 h-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-width="2" /></svg>
-                        Real-Time Diagnostics
-                    </a>
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9l2 2-2 2-2-2 2-2zm-6 8h12M6 7h12M6 11h12"/></svg>Automator AI</a>
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3z"/><path d="M19 21l-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>IDPS</a>
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h10"/></svg>AI Data Collector</a>
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>SBOM (Software Bill of Materials)</a>
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 1 1-9-9"/><path d="M21 3v6h-6"/></svg>Vehicle Security Operation Center (vSOC)</a>
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16v-4m0 0V8m0 4h4m-4 0H8"/><path d="M3 15a4 4 0 0 0 4 4h10a4 4 0 0 0 4-4V9a4 4 0 0 0-4-4H12l-2-2H7a4 4 0 0 0-4 4z"/></svg>OTA Updater</a>
                 </div>
             </div>
 
@@ -268,14 +282,7 @@
                     </svg>
                 </button>
                 <div x-show="open" x-cloak x-transition class="pl-3 space-y-1">
-                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600">
-                        <svg class="w-4 h-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l9-5-9-5-9 5 9 5z" /></svg>
-                        SDV Bootcamp
-                    </a>
-                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600">
-                        <svg class="w-4 h-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-width="2" /></svg>
-                        AI for Automotive
-                    </a>
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><svg class="w-4 h-4 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12l5-5 5 5M5 12v7h10v-7"/></svg>Automative</a>
                 </div>
             </div>
 
