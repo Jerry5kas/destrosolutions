@@ -1,5 +1,5 @@
 <div class="space-y-4 xs:space-y-5 sm:space-y-6 pb-12 xs:pb-14 sm:pb-16 px-3 xs:px-4 sm:px-6" x-data="faqSection" data-reveal-scope data-reveal>
-    <h1 data-reveal class="reveal-delay-0 w-full text-center font-roboto-slab text-lg xs:text-xl sm:text-2xl md:text-3xl font-semibold px-2">
+    <h1 data-reveal class="reveal-delay-0 w-full text-center font-roboto-slab text-lg xs:text-xl sm:text-2xl md:text-3xl font-semibold px-2 text-slate-600">
         Frequently Asked Questions.
     </h1>
 
@@ -10,7 +10,7 @@
                 <template x-for="(item, index) in faqs.slice(0, 4)" :key="index">
                     <div class="py-3 xs:py-4 w-full">
                         <button
-                            @click="toggle(index)"
+                            @click="openAfterClose(index)"
                             class="w-full flex items-center justify-between text-left gap-3 xs:gap-4 sm:gap-5 group px-2"
                         >
                             <div class="flex items-center gap-x-2 text-gray-800 font-medium w-full">
@@ -30,12 +30,12 @@
                         <!-- Answer -->
                         <div
                             x-show="active === index"
-                            x-transition:enter="transition ease-out duration-400"
-                            x-transition:enter-start="opacity-0 -translate-y-2"
+                            x-transition:enter="transition ease-out duration-500"
+                            x-transition:enter-start="opacity-0 -translate-y-1"
                             x-transition:enter-end="opacity-100 translate-y-0"
-                            x-transition:leave="transition ease-in duration-300"
+                            x-transition:leave="transition ease-in duration-450"
                             x-transition:leave-start="opacity-100 translate-y-0"
-                            x-transition:leave-end="opacity-0 -translate-y-2"
+                            x-transition:leave-end="opacity-0 -translate-y-1"
                             class="mt-2 xs:mt-3 text-gray-600 text-xs xs:text-sm leading-relaxed w-full px-2"
                             x-text="item.a">
                         </div>
@@ -50,7 +50,7 @@
                 <template x-for="(item, index) in faqs.slice(4, 8)" :key="index">
                     <div class="py-3 xs:py-4 w-full">
                         <button
-                            @click="toggle(index + 4)"
+                            @click="openAfterClose(index + 4)"
                             class="w-full flex items-center justify-between text-left gap-3 xs:gap-4 sm:gap-5 group px-2"
                         >
                             <div class="flex items-center gap-x-2 text-gray-800 font-medium w-full">
@@ -70,12 +70,12 @@
                         <!-- Answer -->
                         <div
                             x-show="active === index + 4"
-                            x-transition:enter="transition ease-out duration-400"
-                            x-transition:enter-start="opacity-0 -translate-y-2"
+                            x-transition:enter="transition ease-out duration-500"
+                            x-transition:enter-start="opacity-0 -translate-y-1"
                             x-transition:enter-end="opacity-100 translate-y-0"
-                            x-transition:leave="transition ease-in duration-300"
+                            x-transition:leave="transition ease-in duration-450"
                             x-transition:leave-start="opacity-100 translate-y-0"
-                            x-transition:leave-end="opacity-0 -translate-y-2"
+                            x-transition:leave-end="opacity-0 -translate-y-1"
                             class="mt-2 xs:mt-3 text-gray-600 text-xs xs:text-sm leading-relaxed w-full px-2"
                             x-text="item.a">
                         </div>
@@ -130,7 +130,7 @@
 
     </div>
     <div class="w-full text-center mt-6 xs:mt-8">
-        <button class="max-w-max mx-auto bg-black text-white px-3 xs:px-4 py-2 text-xs xs:text-sm hover:bg-gray-800 transition-colors duration-300 rounded-sm">More Information</button>
+        <button class="max-w-max mx-auto bg-blue-700 text-white px-3 xs:px-4 py-4 text-xs xs:text-smd hover:bg-blue-600 transition-colors duration-300 rounded-sm">More Information</button>
     </div>
 </div>
 
@@ -138,6 +138,7 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('faqSection', () => ({
             active: null,
+            leaveDelayMs: 480,
             faqs: [
                 { q: 'Can I ask for a full refund?', a: 'Yes, you can request a full refund within 14 days of purchase if you are not satisfied. Just contact our support team.' },
                 { q: 'How long does shipping take?', a: 'Typically, shipping takes between 3–5 business days depending on your location and product availability.' },
@@ -148,8 +149,17 @@
                 { q: 'Do you offer custom software integration?', a: 'We provide tailored integration and engineering services for automotive systems.' },
                 { q: 'How can I contact support?', a: 'You can reach out via our contact form or email for any technical or project inquiries.' },
             ],
-            toggle(index) {
-                this.active = this.active === index ? null : index;
+            openAfterClose(index) {
+                if (this.active === index) {
+                    this.active = null;
+                    return;
+                }
+                if (this.active !== null) {
+                    this.active = null;
+                    setTimeout(() => { this.active = index; }, this.leaveDelayMs);
+                } else {
+                    this.active = index;
+                }
             }
         }));
     });

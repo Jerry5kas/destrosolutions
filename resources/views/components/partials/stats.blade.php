@@ -9,24 +9,49 @@
     x-data="{
         count: 0,
         finalCount: {{ preg_replace('/[^0-9]/', '', $count) }}, // extract only digits
-        duration: 2000, // 2 seconds
+        suffix: '{{ trim(preg_replace('/[0-9]/', '', $count)) }}',
+        duration: 4500, // slower: 4.5 seconds
+        easing(t) { // ease-out cubic for smooth deceleration
+            t = Math.min(Math.max(t, 0), 1);
+            return 1 - Math.pow(1 - t, 3);
+        },
+        hasAnimated: false,
         start() {
+            if (this.hasAnimated) return;
+            this.hasAnimated = true;
             const startTime = performance.now();
             const animate = (currentTime) => {
-                const progress = Math.min((currentTime - startTime) / this.duration, 1);
-                this.count = Math.floor(progress * this.finalCount);
-                if (progress < 1) requestAnimationFrame(animate);
+                const linear = Math.min((currentTime - startTime) / this.duration, 1);
+                const eased = this.easing(linear);
+                this.count = Math.round(eased * this.finalCount);
+                if (linear < 1) requestAnimationFrame(animate);
             };
             requestAnimationFrame(animate);
+        },
+        init() {
+            // Trigger animation when visible
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.start();
+                            observer.disconnect();
+                        }
+                    });
+                }, { threshold: 0.3 });
+                observer.observe(this.$el);
+            } else {
+                this.start();
+            }
         }
     }"
-    x-init="start()"
+    x-init="init()"
     class="text-center w-full space-y-1 xs:space-y-2 sm:space-y-3 md:space-y-4 {{ $border }}"
     data-reveal
 >
     <!-- Animated Count -->
     <div class="font-inter text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
-        <span x-text="count"></span>+<span> {{ $text }}</span>
+        <span class="text-blue-700" x-text="count"></span><span  class="text-blue-700" x-text="suffix"></span><span> {{ $text }}</span>
     </div>
 
     <!-- Tag -->
