@@ -100,14 +100,14 @@
         class="relative w-full flex justify-center items-center my-12 xs:my-16 sm:my-18 md:my-20 overflow-hidden group/outer"
     >
         <!-- Carousel Container -->
-        <div class="relative w-[85%] xs:w-[82%] sm:w-[80%] overflow-hidden">
+        <div class="relative w-[85%] xs:w-[82%] sm:w-[80%] overflow-hidden" data-reveal class="reveal-delay-0">
             <div
                 class="flex gap-4 xs:gap-6 sm:gap-8 items-center transition-transform ease-linear"
                 :style="`transform: translateX(-${translateX}px)`"
             >
                 <template x-for="(img, index) in doubledImages" :key="index">
                     <!-- Individual Card Group -->
-                    <div class="flex-shrink-0 relative group overflow-hidden rounded-lg">
+                    <div class="flex-shrink-0 relative group overflow-hidden rounded-lg" data-reveal :class="'reveal-delay-' + (index % 6)">
                         <!-- Image -->
                         <img
                             :src="img"

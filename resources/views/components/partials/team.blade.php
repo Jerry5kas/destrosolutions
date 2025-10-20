@@ -43,8 +43,8 @@
                     <div class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-6 xs:gap-8 sm:gap-10 px-3 xs:px-4 sm:px-6">
                         <div class="w-full lg:w-3/4 flex flex-col sm:flex-row justify-center lg:justify-evenly items-center gap-4 xs:gap-6 sm:gap-8">
                             <!-- Loop through team members -->
-                            @foreach($teamMembers as $member)
-                                <div class="inset-0 z-20 w-48 xs:w-52 sm:w-56 md:w-60 lg:w-64 h-60 xs:h-64 sm:h-68 md:h-72 bg-white flex flex-row justify-start relative group overflow-hidden rounded-sm" data-reveal>
+                            @foreach($teamMembers as $index => $member)
+                                <div class="inset-0 z-20 w-48 xs:w-52 sm:w-56 md:w-60 lg:w-64 h-60 xs:h-64 sm:h-68 md:h-72 bg-white flex flex-row justify-start relative group overflow-hidden rounded-sm" data-reveal :class="'reveal-delay-' + Math.min($index, 7)">
                                     <div class="flex flex-col gap-y-1 xs:gap-y-2 relative w-full h-full">
                                         <!-- Image -->
                                         <img
@@ -96,8 +96,8 @@
 
                         <!-- Right Text Column -->
                         <div class="w-full lg:w-1/4 space-y-3 xs:space-y-4 sm:space-y-5 text-center lg:text-left">
-                            <div class="font-roboto-slab font-semibold text-lg xs:text-xl sm:text-2xl">Our Amazing Team Members</div>
-                            <div class="text-xs xs:text-sm text-gray-600 leading-relaxed px-2">
+                            <div data-reveal class="reveal-delay-2 font-roboto-slab font-semibold text-lg xs:text-xl sm:text-2xl">Our Amazing Team Members</div>
+                            <div data-reveal class="reveal-delay-3 text-xs xs:text-sm text-gray-600 leading-relaxed px-2">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate deserunt doloribus enim error et in non tempora ut? Ea, similique...
                             </div>
                         </div>

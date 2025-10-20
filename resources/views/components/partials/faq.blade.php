@@ -1,11 +1,11 @@
 <div class="space-y-4 xs:space-y-5 sm:space-y-6 pb-12 xs:pb-14 sm:pb-16 px-3 xs:px-4 sm:px-6" x-data="faqSection" data-reveal-scope data-reveal>
-    <h1 class="w-full text-center font-roboto-slab text-lg xs:text-xl sm:text-2xl md:text-3xl font-semibold px-2">
+    <h1 data-reveal class="reveal-delay-0 w-full text-center font-roboto-slab text-lg xs:text-xl sm:text-2xl md:text-3xl font-semibold px-2">
         Frequently Asked Questions.
     </h1>
 
     <div class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 xs:gap-8 sm:gap-10 md:gap-12 text-xs xs:text-sm text-gray-600 py-4 xs:py-5 sm:py-6" data-reveal>
         <!-- Left Column -->
-        <div class="flex flex-col justify-center items-center">
+        <div class="flex flex-col justify-center items-center" data-reveal class="reveal-delay-1">
             <div class="w-full max-w-sm divide-y divide-gray-200 bg-white rounded-xl">
                 <template x-for="(item, index) in faqs.slice(0, 4)" :key="index">
                     <div class="py-3 xs:py-4 w-full">
@@ -45,7 +45,7 @@
         </div>
 
         <!-- Middle Column -->
-        <div class="flex flex-col justify-center items-center">
+        <div class="flex flex-col justify-center items-center" data-reveal class="reveal-delay-2">
             <div class="w-full max-w-sm divide-y divide-gray-200 bg-white rounded-xl">
                 <template x-for="(item, index) in faqs.slice(4, 8)" :key="index">
                     <div class="py-3 xs:py-4 w-full">
@@ -85,7 +85,7 @@
         </div>
 
         <!-- Right Column -->
-        <div class="text-xs xs:text-sm text-gray-600 leading-relaxed px-2">
+        <div class="text-xs xs:text-sm text-gray-600 leading-relaxed px-2" data-reveal class="reveal-delay-3">
             <p class="mb-2 xs:mb-3">
                 At DestroSolutions, we provide expert consulting and engineering services to support OEMs and Tier-1 suppliers in delivering secure, compliant, and future-ready vehicle platforms.
             </p>

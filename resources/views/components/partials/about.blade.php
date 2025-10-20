@@ -1,8 +1,8 @@
-<div >
-    <div class="py-6 xs:py-8 sm:pt-10 md:pt-12 lg:pt-16 flex flex-col justify-center items-center gap-y-3 xs:gap-y-4 sm:gap-y-5 md:gap-y-6 px-3 xs:px-4 sm:px-6">
-        <h1 class="font-roboto-slab font-semibold text-xl xs:text-2xl sm:text-3xl md:text-4xl text-center">About Us</h1>
-        <span class="w-8 xs:w-10 border border-b "></span>
-        <span class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl mx-auto text-justify sm:text-center text-gray-400 leading-relaxed px-2">
+<div data-reveal-scope>
+    <div class="py-6 xs:py-8 sm:pt-10 md:pt-12 lg:pt-16 flex flex-col justify-center items-center gap-y-3 xs:gap-y-4 sm:gap-y-5 md:gap-y-6 px-3 xs:px-4 sm:px-6" data-reveal>
+        <h1 class="reveal-delay-0 font-roboto-slab font-semibold text-xl xs:text-2xl sm:text-3xl md:text-4xl text-center" data-reveal>About Us</h1>
+        <span class="reveal-delay-1 w-8 xs:w-10 border border-b " data-reveal></span>
+        <span class="reveal-delay-2 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl mx-auto text-justify sm:text-center text-gray-400 leading-relaxed px-2" data-reveal>
                 At DestroSolutions, we enable the future of mobility by driving the transition to Software-Defined
                 Vehicles (SDVs). Our expertise spans end-to-end automotive cybersecurity, software update management,
                 functional safety, and E/E architecture transformation. Our commitment to Safety & security standards,
