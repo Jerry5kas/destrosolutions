@@ -1,5 +1,5 @@
 @props([
-    'src' => 'https://templates.framework-y.com/structura/images/gallery/image-5.jpg',
+    'src' => "",
     'title' => 'Title',
     'desc' => 'Lorem ipsum dolor sit amet, consectetur.'
 ])
@@ -11,13 +11,13 @@
 
         <!-- Image -->
         <img
-            src="{{ $src }}"
+            src="{{asset('images/car1.jpg')}}"
             alt="Gallery Image"
             class="w-full h-full object-cover scale-100 group-hover:scale-125 transition-transform duration-700 ease-in-out">
 
         <!-- Overlay -->
         <div
-            class="absolute inset-0 z-10 bg-black/30 flex items-center justify-center opacity-0
+            class="absolute inset-0 z-10 bg-blue-700/30 flex items-center justify-center opacity-0
                    transition-all duration-500 ease-in-out group-hover:opacity-100">
             <h1 class="text-white text-sm xs:text-base sm:text-lg font-semibold transform transition-transform duration-500 ease-in-out group-hover:scale-110 text-center px-2">
                 {{ $title }}
