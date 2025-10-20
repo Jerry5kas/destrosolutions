@@ -74,7 +74,7 @@
         <!-- Desktop Nav -->
         <div class="hidden md:flex space-x-12 items-center font-semibold">
             <a class="text-sm text-gray-700 hover:text-black" href="#">Home</a>
-            <a class="text-sm text-gray-700 hover:text-black" href="{{url()}}">Quantum</a>
+            <a class="text-sm text-gray-700 hover:text-black" href="{{url('/')}}">Quantum</a>
             <a class="text-sm text-gray-700 hover:text-black" href="#">Services</a>
             <a class="text-sm text-gray-700 hover:text-black" href="#">Products</a>
             <a class="text-sm text-gray-700 hover:text-black" href="#">Training</a>

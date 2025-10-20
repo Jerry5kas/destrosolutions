@@ -10,7 +10,7 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
     <style>
         .dark-glass-bg {
-            background: 
+            background:
                 linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%),
                 radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
@@ -18,79 +18,79 @@
             background-size: 400% 400%, 800px 800px, 600px 600px, 400px 400px;
             animation: gradientShift 30s ease-in-out infinite;
         }
-        
+
         @keyframes gradientShift {
-            0%, 100% { 
-                background-position: 0% 50%, 0 0, 0 0, 0 0; 
+            0%, 100% {
+                background-position: 0% 50%, 0 0, 0 0, 0 0;
             }
-            25% { 
-                background-position: 100% 50%, 200px 200px, 150px 150px, 100px 100px; 
+            25% {
+                background-position: 100% 50%, 200px 200px, 150px 150px, 100px 100px;
             }
-            50% { 
-                background-position: 50% 100%, 400px 400px, 300px 300px, 200px 200px; 
+            50% {
+                background-position: 50% 100%, 400px 400px, 300px 300px, 200px 200px;
             }
-            75% { 
-                background-position: 50% 0%, 600px 600px, 450px 450px, 300px 300px; 
+            75% {
+                background-position: 50% 0%, 600px 600px, 450px 450px, 300px 300px;
             }
         }
-        
+
         .glass-sidebar {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
             border-right: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
+            box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.1),
                 inset -1px 0 0 rgba(255, 255, 255, 0.05);
         }
-        
+
         .glass-header {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
-        
+
         .glass-card {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 
+            box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.1),
                 inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
-        
+
         .glass-table {
             background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        
+
         .glass-input {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: #ffffff;
         }
-        
+
         .glass-input:focus {
             background: rgba(255, 255, 255, 0.12);
             border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 
+            box-shadow:
                 0 0 0 3px rgba(59, 130, 246, 0.1),
                 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        
+
         .glass-input::placeholder {
             color: rgba(255, 255, 255, 0.6);
         }
-        
+
         .glass-button {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #ffffff;
         }
-        
+
         .glass-button:hover {
             background: rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.3);
@@ -98,8 +98,8 @@
     </style>
 </head>
 <body class="dark-glass-bg min-h-screen text-white">
-    <div x-data="{ 
-        open: window.innerWidth > 1024, 
+    <div x-data="{
+        open: window.innerWidth > 1024,
         mobileMenuOpen: false,
         init() {
             // Handle window resize
@@ -113,9 +113,9 @@
             });
         }
     }" class="flex min-h-screen">
-        
+
         <!-- Mobile Overlay -->
-        <div x-show="mobileMenuOpen && window.innerWidth <= 1024" 
+        <div x-show="mobileMenuOpen && window.innerWidth <= 1024"
              x-transition:enter="transition-opacity ease-linear duration-300"
              x-transition:enter-start="opacity-0"
              x-transition:enter-end="opacity-100"
@@ -128,15 +128,15 @@
         <!-- Sidebar -->
         <aside :class="[
             'transition-all duration-300 ease-in-out glass-sidebar',
-            window.innerWidth <= 1024 ? 
-                (mobileMenuOpen ? 'fixed inset-y-0 left-0 z-50 w-72' : '-translate-x-full fixed inset-y-0 left-0 z-50 w-72') : 
+            window.innerWidth <= 1024 ?
+                (mobileMenuOpen ? 'fixed inset-y-0 left-0 z-50 w-72' : '-translate-x-full fixed inset-y-0 left-0 z-50 w-72') :
                 (open ? 'w-72' : 'w-16')
-        ]" 
+        ]"
         class="lg:relative lg:z-auto lg:translate-x-0">
             <!-- Sidebar Header -->
             <div class="h-16 flex items-center px-4 border-b border-white/10 bg-white/5">
-                <button class="mr-3 text-white/70 hover:text-white transition-colors" 
-                        @click="open = !open; if (window.innerWidth <= 1024) mobileMenuOpen = false" 
+                <button class="mr-3 text-white/70 hover:text-white transition-colors"
+                        @click="open = !open; if (window.innerWidth <= 1024) mobileMenuOpen = false"
                         title="Toggle sidebar">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -159,7 +159,7 @@
                 <!-- Dashboard -->
                 <div>
                     <div class="px-3 text-xs font-semibold text-white/50 uppercase tracking-wider mb-2" x-show="open || window.innerWidth <= 1024">Overview</div>
-                    <a href="{{ route('admin.dashboard') }}" 
+                    <a href="{{ route('admin.dashboard') }}"
                        class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 {{ request()->routeIs('admin.dashboard') ? 'bg-white/10 text-white shadow-sm' : 'text-white/70 hover:bg-white/5 hover:text-white' }}"
                        @click="if (window.innerWidth <= 1024) mobileMenuOpen = false">
                         <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,15 +169,15 @@
                         <span x-show="open || window.innerWidth <= 1024" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translate-x-2" x-transition:enter-end="opacity-100 transform translate-x-0">Dashboard</span>
                     </a>
                 </div>
-                
+
                 <!-- Content Management -->
                 <div x-data="{ contentOpen: true }">
                     <div class="px-3 text-xs font-semibold text-white/50 uppercase tracking-wider mb-2" x-show="open || window.innerWidth <= 1024">Content</div>
-                    <button @click="contentOpen = !contentOpen" 
+                    <button @click="contentOpen = !contentOpen"
                             class="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium text-white/70 hover:bg-white/5 hover:text-white rounded-lg transition-all duration-200">
                         <div class="flex items-center gap-3">
                             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
                             </svg>
                             <span x-show="open || window.innerWidth <= 1024" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translate-x-2" x-transition:enter-end="opacity-100 transform translate-x-0">Content Management</span>
                         </div>
@@ -185,13 +185,13 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    
-                    <div x-show="contentOpen && (open || window.innerWidth <= 1024)" 
-                         x-transition:enter="transition ease-out duration-200" 
-                         x-transition:enter-start="opacity-0 transform -translate-y-2" 
-                         x-transition:enter-end="opacity-100 transform translate-y-0" 
+
+                    <div x-show="contentOpen && (open || window.innerWidth <= 1024)"
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
                          :class="window.innerWidth <= 1024 ? 'mt-2 space-y-1' : 'ml-6 mt-2 space-y-1'">
-                        <a href="{{ route('admin.banners.index') }}" 
+                        <a href="{{ route('admin.banners.index') }}"
                            class="flex items-center gap-3 px-3 py-2 text-sm text-white/60 hover:bg-white/5 hover:text-white rounded-md transition-all duration-200 {{ request()->routeIs('admin.banners.*') ? 'bg-white/10 text-white' : '' }}"
                            @click="if (window.innerWidth <= 1024) mobileMenuOpen = false">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,7 +199,7 @@
                             </svg>
                             <span class="font-medium">Banners</span>
                         </a>
-                        <a href="{{ route('admin.quantum.index') }}" 
+                        <a href="{{ route('admin.quantum.index') }}"
                            class="flex items-center gap-3 px-3 py-2 text-sm text-white/60 hover:bg-white/5 hover:text-white rounded-md transition-all duration-200 {{ request()->routeIs('admin.quantum.*') ? 'bg-white/10 text-white' : '' }}"
                            @click="if (window.innerWidth <= 1024) mobileMenuOpen = false">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -207,7 +207,7 @@
                             </svg>
                             <span class="font-medium">Quantum</span>
                         </a>
-                        <a href="{{ route('admin.services.index') }}" 
+                        <a href="{{ route('admin.services.index') }}"
                            class="flex items-center gap-3 px-3 py-2 text-sm text-white/60 hover:bg-white/5 hover:text-white rounded-md transition-all duration-200 {{ request()->routeIs('admin.services.*') ? 'bg-white/10 text-white' : '' }}"
                            @click="if (window.innerWidth <= 1024) mobileMenuOpen = false">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -215,7 +215,7 @@
                             </svg>
                             <span class="font-medium">Services</span>
                         </a>
-                        <a href="{{ route('admin.products.index') }}" 
+                        <a href="{{ route('admin.products.index') }}"
                            class="flex items-center gap-3 px-3 py-2 text-sm text-white/60 hover:bg-white/5 hover:text-white rounded-md transition-all duration-200 {{ request()->routeIs('admin.products.*') ? 'bg-white/10 text-white' : '' }}"
                            @click="if (window.innerWidth <= 1024) mobileMenuOpen = false">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -223,7 +223,7 @@
                             </svg>
                             <span class="font-medium">Products</span>
                         </a>
-                        <a href="{{ route('admin.training.index') }}" 
+                        <a href="{{ route('admin.training.index') }}"
                            class="flex items-center gap-3 px-3 py-2 text-sm text-white/60 hover:bg-white/5 hover:text-white rounded-md transition-all duration-200 {{ request()->routeIs('admin.training.*') ? 'bg-white/10 text-white' : '' }}"
                            @click="if (window.innerWidth <= 1024) mobileMenuOpen = false">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -233,28 +233,40 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Blog Management -->
-                <div x-data="{ blogOpen: false }">
-                    <button @click="blogOpen = !blogOpen" 
+                <div x-data="{ blogOpen: true }">
+                    <button @click="blogOpen = !blogOpen"
                             class="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium text-white/70 hover:bg-white/5 hover:text-white rounded-lg transition-all duration-200">
                         <div class="flex items-center gap-3">
                             <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
                             </svg>
-                            <span x-show="open || window.innerWidth <= 1024" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translate-x-2" x-transition:enter-end="opacity-100 transform translate-x-0">Blog</span>
+                            <span x-show="open || window.innerWidth <= 1024" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translate-x-2" x-transition:enter-end="opacity-100 transform translate-x-0">Blog Management</span>
                         </div>
-                        <svg class="w-4 h-4 transition-transform duration-200 flex-shrink-0" :class="blogOpen ? 'rotate-90' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        <svg class="w-4 h-4 transition-transform duration-200 flex-shrink-0" :class="blogOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    
-                    <div x-show="blogOpen && (open || window.innerWidth <= 1024)" 
-                         x-transition:enter="transition ease-out duration-200" 
-                         x-transition:enter-start="opacity-0 transform -translate-y-2" 
-                         x-transition:enter-end="opacity-100 transform translate-y-0" 
+{{--                    <button @click="blogOpen = !blogOpen"--}}
+{{--                            class="w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium text-white/70 hover:bg-white/5 hover:text-white rounded-lg transition-all duration-200">--}}
+{{--                        <div class="flex items-center gap-3">--}}
+{{--                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">--}}
+{{--                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>--}}
+{{--                            </svg>--}}
+{{--                            <span x-show="open || window.innerWidth <= 1024" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translate-x-2" x-transition:enter-end="opacity-100 transform translate-x-0">Blog</span>--}}
+{{--                        </div>--}}
+{{--                        <svg class="w-4 h-4 transition-transform duration-200 flex-shrink-0" :class="blogOpen ? 'rotate-90' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">--}}
+{{--                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>--}}
+{{--                        </svg>--}}
+{{--                    </button>--}}
+
+                    <div x-show="blogOpen && (open || window.innerWidth <= 1024)"
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                         x-transition:enter-end="opacity-100 transform translate-y-0"
                          :class="window.innerWidth <= 1024 ? 'mt-2 space-y-1' : 'ml-6 mt-2 space-y-1'">
-                        <a href="{{ route('admin.blog.categories.index') }}" 
+                        <a href="{{ route('admin.blog.categories.index') }}"
                            class="flex items-center gap-3 px-3 py-2 text-sm text-white/60 hover:bg-white/5 hover:text-white rounded-md transition-all duration-200 {{ request()->routeIs('admin.blog.categories.*') ? 'bg-white/10 text-white' : '' }}"
                            @click="if (window.innerWidth <= 1024) mobileMenuOpen = false">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -262,7 +274,7 @@
                             </svg>
                             <span class="font-medium">Categories</span>
                         </a>
-                        <a href="{{ route('admin.blog.posts.index') }}" 
+                        <a href="{{ route('admin.blog.posts.index') }}"
                            class="flex items-center gap-3 px-3 py-2 text-sm text-white/60 hover:bg-white/5 hover:text-white rounded-md transition-all duration-200 {{ request()->routeIs('admin.blog.posts.*') ? 'bg-white/10 text-white' : '' }}"
                            @click="if (window.innerWidth <= 1024) mobileMenuOpen = false">
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -272,9 +284,9 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Contacts -->
-                <a href="{{ route('admin.contacts.index') }}" 
+                <a href="{{ route('admin.contacts.index') }}"
                    class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-white/70 hover:bg-white/5 hover:text-white rounded-lg transition-all duration-200 {{ request()->routeIs('admin.contacts.*') ? 'bg-white/10 text-white shadow-sm' : '' }}"
                    @click="if (window.innerWidth <= 1024) mobileMenuOpen = false">
                     <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -290,7 +302,7 @@
             <header class="h-16 glass-header flex items-center justify-between px-4 lg:px-6 sticky top-0 z-30">
                 <!-- Mobile Menu Button -->
                 <div class="flex items-center gap-4">
-                    <button class="lg:hidden p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors" 
+                    <button class="lg:hidden p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
                             @click="mobileMenuOpen = !mobileMenuOpen"
                             title="Toggle menu">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -299,7 +311,7 @@
                     </button>
                     <div class="text-white font-semibold">{{ $header ?? 'Dashboard' }}</div>
                 </div>
-                
+
                 <!-- User Menu -->
                 <div class="flex items-center gap-3" x-data="{ userMenuOpen: false }">
                     <div class="flex items-center gap-2 text-sm text-white/80">
@@ -308,16 +320,16 @@
                         </div>
                         <span class="hidden md:block">{{ auth('admin')->user()->name ?? '' }}</span>
                     </div>
-                    
-                    <button @click="userMenuOpen = !userMenuOpen" 
+
+                    <button @click="userMenuOpen = !userMenuOpen"
                             class="p-1 text-white/70 hover:text-white transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </button>
-                    
+
                     <!-- User Dropdown -->
-                    <div x-show="userMenuOpen" 
+                    <div x-show="userMenuOpen"
                          @click.away="userMenuOpen = false"
                          x-transition:enter="transition ease-out duration-100"
                          x-transition:enter-start="opacity-0 scale-95"
@@ -370,9 +382,9 @@
                                     </ul>
                                 </x-toast>
                             @endif
-                            
+
                             <!-- Global Loading Overlay -->
-                            <div x-data="{ 
+                            <div x-data="{
                                 loading: false,
                                 init() {
                                     this.$watch('loading', value => {
@@ -383,13 +395,13 @@
                                         }
                                     });
                                 }
-                            }" 
+                            }"
                             @loading-start.window="loading = true"
                             @loading-end.window="loading = false"
                             @loading-error.window="loading = false">
-                                
+
                                 <!-- Loading Overlay -->
-                                <div x-show="loading" 
+                                <div x-show="loading"
                                      x-transition:enter="transition ease-out duration-200"
                                      x-transition:enter-start="opacity-0"
                                      x-transition:enter-end="opacity-100"
@@ -401,7 +413,7 @@
                                         <x-loading-spinner size="xl" color="blue" text="Loading..." />
                                     </div>
                                 </div>
-                                
+
                                 <div class="rounded-xl glass-card p-4">
                                     {{ $slot }}
                                 </div>
