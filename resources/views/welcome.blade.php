@@ -1,7 +1,7 @@
 <x-layouts.app>
     <div data-reveal-scope>
         <div data-reveal>
-            <x-partials.hero/>
+            <x-partials.hero :slides="$slides"/>
         </div>
         <div data-reveal>
             <x-partials.about />

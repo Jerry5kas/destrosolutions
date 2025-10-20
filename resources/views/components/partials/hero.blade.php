@@ -19,7 +19,7 @@
         :style="`background-image: url(${slide.bg});`"
       >
         <!-- White overlay -->
-        <div class="absolute inset-0 bg-white/75 backdrop-blur-[1px] z-0"></div>
+        <div class="absolute inset-0 bg-blue-600/40 backdrop-blur-[1px] z-0"></div>
 
         <!-- Grid lines - Hidden on mobile, visible on md+ -->
         <div class="absolute inset-0 z-10 hidden md:flex border-l border-r border-gray-300">
@@ -32,10 +32,10 @@
 
         <!-- Content -->
         <div class="relative z-20 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto px-3 xs:px-4 sm:px-6 md:px-8 text-black flex flex-col justify-center items-center gap-y-3 xs:gap-y-4 sm:gap-y-6 md:gap-y-8">
-          <h1 data-reveal class="reveal-delay-0 text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold font-sans leading-tight text-center" x-text="slide.title"></h1>
-          <p data-reveal class="reveal-delay-1 text-gray-700 text-xs xs:text-sm sm:text-sm md:text-base lg:text-lg leading-relaxed max-w-xs xs:max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl text-center px-2" x-text="slide.subtitle"></p>
-          <button data-reveal class="reveal-delay-2 bg-black text-white font-semibold max-w-max py-2 px-4 xs:py-2 xs:px-5 sm:py-3 sm:px-6 md:py-3 md:px-7 hover:bg-gray-800 transition-colors duration-300 text-xs xs:text-sm sm:text-sm md:text-base rounded-sm">
-            Become elite
+          <h1 data-reveal class="text-white reveal-delay-0 text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-extrabold font-sans leading-tight text-center" x-text="slide.title"></h1>
+          <p data-reveal class="reveal-delay-1 text-gray-100 text-xs xs:text-sm sm:text-sm md:text-base lg:text-lg leading-relaxed max-w-xs xs:max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl text-center px-2" x-text="slide.subtitle"></p>
+          <button data-reveal class="reveal-delay-2 bg-blue-600 text-white font-semibold max-w-max py-2 px-4 xs:py-2 xs:px-5 sm:py-3 sm:px-6 md:py-3 md:px-7 hover:bg-blue-800 transition-colors duration-300 text-xs xs:text-sm sm:text-sm md:text-base rounded-sm">
+            Get in Contact
           </button>
         </div>
       </div>
@@ -61,23 +61,7 @@
   document.addEventListener('alpine:init', () => {
     Alpine.data('carousel', () => ({
       currentIndex: 0,
-      slides: [
-        {
-          title: 'Structura',
-          subtitle: 'Lorem ipsum dolor sit amet consectetur adipiscing elit...',
-          bg: '{{ asset("images/car1.jpg") }}'
-        },
-        {
-          title: 'Innovation',
-          subtitle: 'Technology meets design with smart architecture...',
-          bg: '{{ asset("images/car2.jpg") }}'
-        },
-        {
-          title: 'Efficiency',
-          subtitle: 'Maximizing productivity through structural excellence...',
-          bg: '{{ asset("images/car3.jpg") }}'
-        }
-      ],
+      slides: @json($slides),
       interval: null,
       start() {
         this.interval = setInterval(() => {
