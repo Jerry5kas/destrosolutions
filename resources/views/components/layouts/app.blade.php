@@ -40,7 +40,7 @@
     <!-- Alpine.js (Include this in your layout before the closing </body>) -->
     <script src="//unpkg.com/alpinejs" defer></script>
 </head>
-<body>
+<body class="smooth-scroll">
 
 <!-- Header -->
 
@@ -51,10 +51,10 @@
 
     <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-2 ">
         <!-- Logo -->
-        <div class="flex items-center space-x-2">
+        <div class="flex items-center space-x-2 relative">
             <img class="w-7 h-7" src="{{ asset('images/letter-d.png') }}" alt="Logo"/>
-            <span class="text-lg font-semibold tracking-wide">
-        DESTRO SOLUTIONS
+            <span class=" absolute left-6 text-lg font-semibold tracking-wide">
+        ESTROSOLUTIONS
       </span>
         </div>
 
@@ -72,27 +72,216 @@
             </button>
         </div>
 
-        <!-- Desktop Nav -->
-        <div class="hidden md:flex space-x-12 items-center font-semibold">
-            <a class="text-sm text-gray-700 hover:text-black" href="#">Home</a>
-            <a class="text-sm text-gray-700 hover:text-black" href="{{url('/')}}">Quantum</a>
-            <a class="text-sm text-gray-700 hover:text-black" href="#">Services</a>
-            <a class="text-sm text-gray-700 hover:text-black" href="#">Products</a>
-            <a class="text-sm text-gray-700 hover:text-black" href="#">Training</a>
-            <a class="text-sm text-gray-700 hover:text-black" href="#">Blog</a>
-            <a class="text-sm text-gray-700 hover:text-black" href="#">Contact Us</a>
+        <!-- Desktop Navigation -->
+        <div
+            x-data="{ openDropdown: null }"
+            class="hidden md:flex space-x-10 items-center font-semibold relative"
+        >
+            @foreach([
+                ['label' => 'Home', 'url' => '#'],
+                ['label' => 'Quantum', 'url' => url('/')],
+                ['label' => 'Services', 'url' => '#', 'dropdown' => 'services'],
+                ['label' => 'Products', 'url' => '#', 'dropdown' => 'products'],
+                ['label' => 'Training', 'url' => '#', 'dropdown' => 'training'],
+                ['label' => 'Blog', 'url' => '#'],
+                ['label' => 'Contact Us', 'url' => '#']
+            ] as $item)
+                <div
+                    class="relative group"
+                    @mouseenter="openDropdown = '{{ $item['dropdown'] ?? '' }}'"
+                    @mouseleave="openDropdown = null"
+                >
+                    <!-- Link -->
+                    <a href="{{ $item['url'] }}"
+                       class="text-sm text-gray-600 hover:text-black relative pb-2 transition-colors duration-300">
+                        {{ $item['label'] }}
+                        <!-- Underline animation -->
+                        <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+
+                    <!-- ===== SERVICES DROPDOWN ===== -->
+                    @if(($item['dropdown'] ?? '') === 'services')
+                        <div
+                            x-show="openDropdown === 'services'"
+                            x-cloak
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                            class="absolute left-0 mt-3 w-max min-w-[280px] max-w-[640px] origin-top bg-white/90 backdrop-blur-md shadow-xl rounded-2xl border border-gray-200 py-5 px-6 z-50"
+                        >
+                            <div class="grid grid-cols-1 gap-6">
+                                <div class="space-y-3">
+                                    <h4 class="text-sm font-semibold text-gray-800">Engineering Services</h4>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3L3 9.75v10.5h10.5L21 14.25V3H9.75z" />
+                                        </svg>
+                                        ECU Development
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                        </svg>
+                                        AI Integration
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+                                        </svg>
+                                        Software Validation
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- ===== PRODUCTS DROPDOWN ===== -->
+                    @if(($item['dropdown'] ?? '') === 'products')
+                        <div
+                            x-show="openDropdown === 'products'"
+                            x-cloak
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                            class="absolute left-0 mt-3 w-max min-w-[320px] max-w-[720px] origin-top bg-white/90 backdrop-blur-md shadow-xl rounded-2xl border border-gray-200 py-5 px-6 z-50"
+                        >
+                            <div class="grid grid-cols-1 gap-6">
+                                <div class="space-y-3">
+                                    <h4 class="text-sm font-semibold text-gray-800">Vehicle Platforms</h4>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4-4" />
+                                        </svg>
+                                        SDV Core Framework
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <circle cx="12" cy="12" r="9" stroke-width="2" />
+                                        </svg>
+                                        Real-Time Diagnostics
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
+                    <!-- ===== TRAINING DROPDOWN ===== -->
+                    @if(($item['dropdown'] ?? '') === 'training')
+                        <div
+                            x-show="openDropdown === 'training'"
+                            x-cloak
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                            x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                            class="absolute left-0 mt-3 w-max min-w-[280px] max-w-[560px] origin-top bg-white/90 backdrop-blur-md shadow-xl rounded-2xl border border-gray-200 py-5 px-6 z-50"
+                        >
+                            <div class="grid grid-cols-1 gap-6">
+                                <div class="space-y-3">
+                                    <h4 class="text-sm font-semibold text-gray-800">Courses</h4>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l9-5-9-5-9 5 9 5z" />
+                                        </svg>
+                                        SDV Bootcamp
+                                    </a>
+                                    <a href="#" class="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <circle cx="12" cy="12" r="9" stroke-width="2" />
+                                        </svg>
+                                        AI for Automotive
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+            @endforeach
         </div>
+
     </div>
 
     <!-- Mobile Nav -->
-    <div x-show="open" x-transition x-cloak class="md:hidden mt-3 space-y-2 px-2">
-        <a class="block text-sm text-gray-700 hover:text-black" href="#">Home</a>
-        <a class="block text-sm text-gray-700 hover:text-black" href="#">Quantum</a>
-        <a class="block text-sm text-gray-700 hover:text-black" href="#">Services</a>
-        <a class="block text-sm text-gray-700 hover:text-black" href="#">Products</a>
-        <a class="block text-sm text-gray-700 hover:text-black" href="#">Training</a>
-        <a class="block text-sm text-gray-700 hover:text-black" href="#">Blog</a>
-        <a class="block text-sm text-gray-700 hover:text-black" href="#">Contact Us</a>
+    <div x-show="open" x-transition x-cloak class="md:hidden mt-3 px-2">
+        <div class="space-y-1">
+            <a class="block text-sm text-gray-700 hover:text-black py-2" href="#">Home</a>
+            <a class="block text-sm text-gray-700 hover:text-black py-2" href="#">Quantum</a>
+
+            <!-- Services mobile submenu -->
+            <div x-data="{ open: false }" class="border-t border-gray-200 pt-1">
+                <button @click="open = !open" class="w-full flex items-center justify-between py-2 text-sm text-gray-700 hover:text-black">
+                    <span>Services</span>
+                    <svg :class="{ 'rotate-180': open }" class="w-4 h-4 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div x-show="open" x-cloak x-transition class="pl-3 space-y-1">
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600">
+                        <svg class="w-4 h-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3L3 9.75v10.5h10.5L21 14.25V3H9.75z" /></svg>
+                        ECU Development
+                    </a>
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600">
+                        <svg class="w-4 h-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                        AI Integration
+                    </a>
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600">
+                        <svg class="w-4 h-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" /></svg>
+                        Software Validation
+                    </a>
+                </div>
+            </div>
+
+            <!-- Products mobile submenu -->
+            <div x-data="{ open: false }" class="border-t border-gray-200 pt-1">
+                <button @click="open = !open" class="w-full flex items-center justify-between py-2 text-sm text-gray-700 hover:text-black">
+                    <span>Products</span>
+                    <svg :class="{ 'rotate-180': open }" class="w-4 h-4 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div x-show="open" x-cloak x-transition class="pl-3 space-y-1">
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600">
+                        <svg class="w-4 h-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4-4" /></svg>
+                        SDV Core Framework
+                    </a>
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600">
+                        <svg class="w-4 h-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-width="2" /></svg>
+                        Real-Time Diagnostics
+                    </a>
+                </div>
+            </div>
+
+            <!-- Training mobile submenu -->
+            <div x-data="{ open: false }" class="border-t border-gray-200 pt-1">
+                <button @click="open = !open" class="w-full flex items-center justify-between py-2 text-sm text-gray-700 hover:text-black">
+                    <span>Training</span>
+                    <svg :class="{ 'rotate-180': open }" class="w-4 h-4 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div x-show="open" x-cloak x-transition class="pl-3 space-y-1">
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600">
+                        <svg class="w-4 h-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l9-5-9-5-9 5 9 5z" /></svg>
+                        SDV Bootcamp
+                    </a>
+                    <a href="#" class="flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600">
+                        <svg class="w-4 h-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-width="2" /></svg>
+                        AI for Automotive
+                    </a>
+                </div>
+            </div>
+
+            <a class="block text-sm text-gray-700 hover:text-black py-2 border-t border-gray-200" href="#">Blog</a>
+            <a class="block text-sm text-gray-700 hover:text-black py-2" href="#">Contact Us</a>
+        </div>
     </div>
 </nav>
 

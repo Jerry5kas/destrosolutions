@@ -65,6 +65,8 @@
 }
 
 @layer utilities {
+  [x-cloak] { display: none !important; }
+
   .reveal-init { opacity: 0; transform: translateY(28px); transition: opacity 850ms var(--ease-out), transform 850ms var(--ease-out); }
   .reveal-in { opacity: 1; transform: translateY(0); }
   .reveal-delay-0 { transition-delay: 0ms; }
@@ -106,5 +108,18 @@
   
   .touch-manipulation {
     touch-action: manipulation;
+  }
+
+  /* LIDAR Cursor - SDV Theme */
+  #lidar-cursor { position: fixed; top: 0; left: 0; width: 42px; height: 42px; pointer-events: none; transform: translate(-50%, -50%); z-index: 9999; opacity: 0; transition: opacity 200ms ease; }
+  #lidar-cursor .lidar-core { width: 6px; height: 6px; background: #2563eb; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 6px rgba(37,99,235,0.8), 0 0 20px rgba(37,99,235,0.3); }
+  #lidar-cursor .lidar-scan { width: 42px; height: 42px; border-radius: 50%; position: absolute; top: 0; left: 0; background: conic-gradient(from 0deg, rgba(37,99,235,0.35), transparent 60%); animation: lidar-rotate 2.2s linear infinite; filter: blur(0.5px); }
+  @keyframes lidar-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .hovering #lidar-cursor .lidar-core { transform: translate(-50%, -50%) scale(1.4); box-shadow: 0 0 10px rgba(37,99,235,0.9), 0 0 25px rgba(37,99,235,0.4); }
+
+  /* Minimal cursor when over nav: hide scan, keep core only */
+  nav:hover ~ #lidar-cursor .lidar-scan,
+  .cursor-minimal #lidar-cursor .lidar-scan {
+    display: none;
   }
 }
