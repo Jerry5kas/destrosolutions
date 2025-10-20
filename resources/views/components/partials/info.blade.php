@@ -1,5 +1,5 @@
-<div class="my-6 xs:my-8 sm:my-10 md:my-12 lg:my-16 border-b border-gray-300 pb-6 xs:pb-8 sm:pb-10 md:pb-12 lg:pb-16 text-gray-600 px-3 xs:px-4 sm:px-6">
-    <div class="flex flex-col text-center max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto pb-4 xs:pb-5 sm:pb-6 md:pb-7 lg:pb-8 space-y-2 xs:space-y-3 md:space-y-3">
+<div class="my-6 xs:my-8 sm:my-10 md:my-12 lg:my-16 border-b border-gray-300 pb-6 xs:pb-8 sm:pb-10 md:pb-12 lg:pb-16 text-gray-600 px-3 xs:px-4 sm:px-6" data-reveal-scope>
+    <div class="flex flex-col text-center max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto pb-4 xs:pb-5 sm:pb-6 md:pb-7 lg:pb-8 space-y-2 xs:space-y-3 md:space-y-3" data-reveal>
         <h1 class="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl font-roboto-slab font-semibold px-2">
             Our Software-defined Vehicle (SDV) solutions</h1>
         <p class="text-xs xs:text-sm sm:text-base md:text-lg text-gray-400 px-2">
@@ -9,7 +9,7 @@
             systems, and the complete DevSecOps lifecycle—to enable next-generation mobility. We support OEMs and
             Tier-1s in building modular, scalable, and secure SDV platforms</span>
     </div>
-    <div class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" data-reveal>
 
         <!-- Image 1 -->
         <div

@@ -1,4 +1,4 @@
-<div class="relative flex items-center justify-center w-full h-[25rem] xs:h-[28rem] sm:h-[32rem] md:h-[35rem] lg:h-[38rem] my-12 xs:my-16 sm:my-18 md:my-20 overflow-hidden">
+<div class="relative flex items-center justify-center w-full h-[25rem] xs:h-[28rem] sm:h-[32rem] md:h-[35rem] lg:h-[38rem] my-12 xs:my-16 sm:my-18 md:my-20 overflow-hidden" data-reveal-scope data-reveal>
     <!-- Background dots -->
     <div class="absolute inset-0 z-0 flex flex-wrap justify-start items-start opacity-60">
         @for($i = 0; $i < 100000; $i++)

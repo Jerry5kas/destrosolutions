@@ -22,6 +22,7 @@
     }"
     x-init="start()"
     class="text-center w-full space-y-1 xs:space-y-2 sm:space-y-3 md:space-y-4 {{ $border }}"
+    data-reveal
 >
     <!-- Animated Count -->
     <div class="font-inter text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">

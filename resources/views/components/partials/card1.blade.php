@@ -4,7 +4,7 @@
     'desc' => 'Lorem ipsum dolor sit amet, consectetur.'
 ])
 
-<div class="flex flex-col justify-center items-center gap-y-2">
+<div class="flex flex-col justify-center items-center gap-y-2" data-reveal>
     <div class="relative group w-full max-w-[280px] xs:max-w-[320px] sm:max-w-[340px] md:max-w-[360px] h-48 xs:h-52 sm:h-56 md:h-60 lg:h-64 bg-white overflow-hidden transition-all duration-500 ease-in-out
             transform hover:scale-95
             shadow-[0_0_15px_8px_rgba(0,0,0,0.08),0_0_40px_15px_rgba(0,0,0,0.04)] hover:shadow-none rounded-sm">

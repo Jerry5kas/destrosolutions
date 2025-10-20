@@ -1,8 +1,8 @@
-<div class="border-b border-b-gray-300 mb-12 xs:mb-16 sm:mb-18 md:mb-20 pb-12 xs:pb-16 sm:pb-18 md:pb-20">
+<div class="border-b border-b-gray-300 mb-12 xs:mb-16 sm:mb-18 md:mb-20 pb-12 xs:pb-16 sm:pb-18 md:pb-20" data-reveal-scope>
     <div
         class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-6 xs:gap-8 sm:gap-10 md:gap-12 lg:gap-16 px-3 xs:px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-6 xs:py-8 sm:py-10">
         <!-- Left Content -->
-        <div class="flex-1 py-4 xs:py-6 sm:py-8 flex flex-col justify-center items-center gap-y-3 xs:gap-y-4 sm:gap-y-5 md:gap-y-6 text-center md:text-left">
+        <div class="flex-1 py-4 xs:py-6 sm:py-8 flex flex-col justify-center items-center gap-y-3 xs:gap-y-4 sm:gap-y-5 md:gap-y-6 text-center md:text-left" data-reveal>
             <h1 class="font-roboto-slab font-semibold text-xl xs:text-2xl sm:text-3xl md:text-4xl text-gray-800">Connect with Us</h1>
             <span class="w-8 xs:w-10 border-b-2 border-gray-400"></span>
             <span
@@ -12,7 +12,7 @@
         </div>
 
         <!-- Right Form -->
-        <div class="flex-1 flex flex-col gap-4 xs:gap-5 sm:gap-6 text-xs xs:text-sm">
+        <div class="flex-1 flex flex-col gap-4 xs:gap-5 sm:gap-6 text-xs xs:text-sm" data-reveal>
 
             <div class="w-full flex flex-col md:flex-row items-center gap-4 xs:gap-5 sm:gap-6">
 

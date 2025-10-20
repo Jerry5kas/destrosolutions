@@ -1,5 +1,5 @@
 <!-- Slides Loop -->
-<div class="w-full">
+<div class="w-full" data-reveal-scope data-reveal>
     <div
         class="w-full h-full flex items-center justify-center relative border-b border-gray-300"
     >
@@ -44,7 +44,7 @@
                         <div class="w-full lg:w-3/4 flex flex-col sm:flex-row justify-center lg:justify-evenly items-center gap-4 xs:gap-6 sm:gap-8">
                             <!-- Loop through team members -->
                             @foreach($teamMembers as $member)
-                                <div class="inset-0 z-20 w-48 xs:w-52 sm:w-56 md:w-60 lg:w-64 h-60 xs:h-64 sm:h-68 md:h-72 bg-white flex flex-row justify-start relative group overflow-hidden rounded-sm">
+                                <div class="inset-0 z-20 w-48 xs:w-52 sm:w-56 md:w-60 lg:w-64 h-60 xs:h-64 sm:h-68 md:h-72 bg-white flex flex-row justify-start relative group overflow-hidden rounded-sm" data-reveal>
                                     <div class="flex flex-col gap-y-1 xs:gap-y-2 relative w-full h-full">
                                         <!-- Image -->
                                         <img

@@ -35,6 +35,7 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
 
     <!-- Alpine.js (Include this in your layout before the closing </body>) -->
     <script src="//unpkg.com/alpinejs" defer></script>

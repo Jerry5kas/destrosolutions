@@ -1,5 +1,7 @@
 
 <section
+  data-reveal-scope
+  data-reveal
   x-data="carousel"
   x-init="start()"
   class="relative w-full h-[24rem] xs:h-[28rem] sm:h-[35rem] md:h-[40rem] lg:h-[45rem] overflow-hidden border border-b border-gray-300"
