@@ -51,11 +51,11 @@
 >
     <!-- Animated Count -->
     <div class="font-inter text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
-        <span class="text-blue-700" x-text="count"></span><span  class="text-blue-700" x-text="suffix"></span><span> {{ $text }}</span>
+        <span class="text-white" x-text="count"></span><span  class="text-white" x-text="suffix"></span><span class="text-gray-200"> {{ $text }}</span>
     </div>
 
     <!-- Tag -->
-    <div class="w-5/6 xs:w-4/5 sm:w-3/4 md:w-2/3 mx-auto text-gray-600 text-xs xs:text-sm sm:text-sm md:text-base leading-relaxed px-1">
+    <div class="w-5/6 xs:w-4/5 sm:w-3/4 md:w-2/3 mx-auto text-gray-300 text-xs xs:text-sm sm:text-sm md:text-base leading-relaxed px-1">
         {{ $tag }}
     </div>
 </div>

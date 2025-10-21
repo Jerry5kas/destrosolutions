@@ -1,12 +1,8 @@
-<div class="relative w-full h-[18rem] xs:h-[22rem] sm:h-[26rem] md:h-[30rem] lg:h-[35rem] overflow-hidden">
-    <!-- Background Image -->
-    <img
-        src="{{ asset('/images/page-temp.webp') }}"
-        alt="Page Hero Image"
-        class="w-full h-full object-cover"
-    >
-
-    <!-- Overlay (optional subtle dark overlay for better readability) -->
+<section
+    class="relative w-full h-[18rem] xs:h-[22rem] sm:h-[26rem] md:h-[30rem] lg:h-[35rem] bg-fixed bg-center bg-cover bg-no-repeat"
+    style="background-image: url('{{ asset('/images/page-temp.webp') }}');"
+>
+    <!-- Overlay -->
     <div class="absolute inset-0 bg-black/40"></div>
 
     <!-- Text Content -->
@@ -20,4 +16,4 @@
             </p>
         </div>
     </div>
-</div>
+</section>

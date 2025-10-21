@@ -4,7 +4,7 @@
 
     <div class="absolute inset-0 z-0 flex flex-wrap justify-start items-start opacity-60">
         @for($i = 0; $i < 100000; $i++)
-            <div class="w-0.5 h-0.5 rounded-full bg-gray-300 m-1"></div>
+            <div class="w-0.5 h-0.5 rounded-full bg-blue-700 m-1"></div>
         @endfor
     </div>
 
@@ -31,7 +31,7 @@
             >
                 <template x-for="(img, index) in doubledImages" :key="index">
                     <!-- Individual Card Group -->
-                    <div class="flex-shrink-0 relative group overflow-hidden rounded-lg" data-reveal :class="'reveal-delay-' + (index % 6)">
+                    <div class="flex-shrink-0 relative group overflow-hidden" data-reveal :class="'reveal-delay-' + (index % 6)">
                         <!-- Image -->
                         <img
                             :src="img"

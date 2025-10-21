@@ -19,7 +19,7 @@
         :style="`background-image: url(${slide.bg});`"
       >
         <!-- White overlay -->
-        <div class="absolute inset-0 bg-blue-600/40 backdrop-blur-[1px] z-0"></div>
+        <div class="absolute inset-0 bg-blue-600/30 backdrop-blur-[1px] z-0"></div>
 
         <!-- Grid lines - Hidden on mobile, visible on md+ -->
         <div class="absolute inset-0 z-10 hidden md:flex border-l border-r border-gray-300">

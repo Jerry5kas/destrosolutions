@@ -1,3 +1,4 @@
 <x-layouts.app>
-    <x-quantom.hero />
+    <x-pages.hero />
+    <x-pages.content />
 </x-layouts.app>

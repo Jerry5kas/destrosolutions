@@ -1,10 +1,10 @@
-<div class="w-full py-12 xs:py-16 sm:py-18 md:py-20 border-t border-b border-gray-300" data-reveal-scope data-reveal>
+<div class="w-full py-12 xs:py-16 sm:py-18 md:py-20 border-t border-b border-gray-300 bg-blue-700" data-reveal-scope data-reveal>
     <div class="max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto flex flex-col md:flex-row justify-center items-center gap-y-4 xs:gap-y-5 sm:gap-y-6 md:gap-x-5 px-3 xs:px-4 sm:px-6">
         <div class="w-full md:w-1/5 flex flex-col gap-y-2 xs:gap-y-3 text-center md:text-left">
-            <div data-reveal class="reveal-delay-0 text-lg xs:text-xl sm:text-2xl md:text-3xl font-semibold font-roboto-slab px-2">
+            <div data-reveal class="reveal-delay-0 text-lg xs:text-xl sm:text-2xl md:text-3xl font-semibold font-roboto-slab px-2 text-white">
                 What's on and Latest News.
             </div>
-            <div data-reveal class="reveal-delay-1 underline underline-offset-2 text-gray-400 text-xs xs:text-sm">All events</div>
+            <div data-reveal class="reveal-delay-1 underline underline-offset-2 text-gray-200 text-xs xs:text-sm">All events</div>
         </div>
 
         <div class="relative w-full sm:w-4/5 mx-auto group " data-reveal class="reveal-delay-2">
@@ -54,11 +54,11 @@
                     >
                         <template x-for="(slide, index) in slides" :key="index">
                             <div class="flex-shrink-0 w-full px-3 xs:px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                                <div class="flex flex-col items-start justify-start space-y-3 xs:space-y-4 sm:space-y-5 py-4 xs:py-5 sm:py-6 md:py-8 lg:py-10">
+                                <div class="flex flex-col items-start justify-start space-y-3 xs:space-y-4 sm:space-y-5 py-4 xs:py-5 sm:py-6 md:py-8 lg:py-10 text-white">
                                     <div class="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl font-roboto-slab font-semibold" x-text="slide.title"></div>
-                                    <div class="text-xs xs:text-sm text-gray-600 leading-relaxed" x-text="slide.text"></div>
+                                    <div class="text-xs xs:text-sm text-gray-200 leading-relaxed" x-text="slide.text"></div>
                                     <div>
-                                        <a :href="slide.link" class="text-xs xs:text-sm underline underline-offset-4 text-gray-700 hover:text-gray-900 transition">Enter now</a>
+                                        <a :href="slide.link" class="text-xs xs:text-sm underline underline-offset-4 text-slate-100 hover:text-gray-900 transition">Enter now</a>
                                     </div>
                                 </div>
                             </div>
