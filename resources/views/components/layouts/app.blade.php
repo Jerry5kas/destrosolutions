@@ -78,13 +78,13 @@
             class="hidden md:flex space-x-10 items-center font-semibold relative"
         >
             @foreach([
-                ['label' => 'Home', 'url' => '#'],
-                ['label' => 'Quantum', 'url' => url('/')],
-                ['label' => 'Services', 'url' => '#', 'dropdown' => 'services'],
-                ['label' => 'Products', 'url' => '#', 'dropdown' => 'products'],
-                ['label' => 'Training', 'url' => '#', 'dropdown' => 'training'],
-                ['label' => 'Blog', 'url' => '#'],
-                ['label' => 'Contact Us', 'url' => '#']
+                ['label' => 'Home', 'url' => '/'],
+                ['label' => 'Quantum', 'url' => url('/page')],
+                ['label' => 'Services', 'url' => '/page', 'dropdown' => 'services'],
+                ['label' => 'Products', 'url' => '/page', 'dropdown' => 'products'],
+                ['label' => 'Training', 'url' => '/page', 'dropdown' => 'training'],
+                ['label' => 'Blog', 'url' => '/page'],
+                ['label' => 'Contact Us', 'url' => '/page']
             ] as $item)
                 <div
                     class="relative group"
@@ -289,7 +289,7 @@
 <a
     href="https://api.whatsapp.com/send/?phone=919398793452&text&type=phone_number&app_absent=0"
     target="_blank"
-    class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-gray-600 hover:bg-green-600 transition-colors duration-300 shadow-lg"
+    class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-blue-700 hover:bg-green-600 transition-colors duration-300 shadow-lg"
     title="Chat with us on WhatsApp"
 >
     <!-- WhatsApp Icon -->

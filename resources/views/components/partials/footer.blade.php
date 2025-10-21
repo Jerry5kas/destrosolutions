@@ -140,7 +140,7 @@
                     <div class="flex items-center gap-x-2 xs:gap-x-3 order-1 sm:order-2">
                         <!-- Facebook -->
                         <a href="https://facebook.com/destrosolutions" target="_blank" rel="noopener noreferrer"
-                           class="p-2 xs:p-2.5 bg-gray-600 rounded-full transition-all duration-300 hover:bg-[#1877F2] hover:scale-110 group">
+                           class="p-2 xs:p-2.5 bg-blue-700 rounded-full transition-all duration-300 hover:bg-[#1877F2] hover:scale-110 group">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"
                                  class="w-3 xs:w-4 h-3 xs:h-4 group-hover:scale-110 transition-transform duration-300">
                                 <path
@@ -150,7 +150,7 @@
 
                         <!-- Instagram -->
                         <a href="https://instagram.com/destrosolutions" target="_blank" rel="noopener noreferrer"
-                           class="p-2 xs:p-2.5 bg-gray-600 rounded-full transition-all duration-300 hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-pink-500 hover:to-purple-600 hover:scale-110 group">
+                           class="p-2 xs:p-2.5 bg-blue-700 rounded-full transition-all duration-300 hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-pink-500 hover:to-purple-600 hover:scale-110 group">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"
                                  class="w-3 xs:w-4 h-3 xs:h-4 group-hover:scale-110 transition-transform duration-300">
                                 <path
@@ -160,7 +160,7 @@
 
                         <!-- LinkedIn -->
                         <a href="https://linkedin.com/company/destrosolutions" target="_blank" rel="noopener noreferrer"
-                           class="p-2 xs:p-2.5 bg-gray-600 rounded-full transition-all duration-300 hover:bg-[#0A66C2] hover:scale-110 group">
+                           class="p-2 xs:p-2.5 bg-blue-700 rounded-full transition-all duration-300 hover:bg-[#0A66C2] hover:scale-110 group">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"
                                  class="w-3 xs:w-4 h-3 xs:h-4 group-hover:scale-110 transition-transform duration-300">
                                 <path
@@ -170,7 +170,7 @@
 
                         <!-- Twitter/X -->
                         <a href="https://twitter.com/destrosolutions" target="_blank" rel="noopener noreferrer"
-                           class="p-2 xs:p-2.5 bg-gray-600 rounded-full transition-all duration-300 hover:bg-[#1DA1F2] hover:scale-110 group">
+                           class="p-2 xs:p-2.5 bg-blue-700 rounded-full transition-all duration-300 hover:bg-[#1DA1F2] hover:scale-110 group">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"
                                  class="w-3 xs:w-4 h-3 xs:h-4 group-hover:scale-110 transition-transform duration-300">
                                 <path
