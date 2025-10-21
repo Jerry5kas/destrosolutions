@@ -15,6 +15,9 @@
         "vite": "^7.0.7"
     },
     "dependencies": {
-        "alpinejs": "^3.15.0"
+        "alpinejs": "^3.15.0",
+        "gsap": "^3.13.0",
+        "locomotive-scroll": "^4.1.4",
+        "split-type": "^0.3.4"
     }
 }
