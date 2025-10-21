@@ -2,8 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContentController;
 
 Route::get('/', [HomeController::class, 'index']);
+
+// Public content routes
+Route::get('/quantum', [ContentController::class, 'quantum'])->name('quantum');
+Route::get('/api/gallery-images', [ContentController::class, 'getGalleryImages'])->name('gallery.images');
 
 
 
@@ -37,5 +42,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('posts', \App\Http\Controllers\Admin\BlogPostController::class)->except(['show']);
         });
         Route::resource('contacts', \App\Http\Controllers\Admin\ContactController::class)->only(['index','destroy']);
+        
+        // New content management resources
+        Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class)->except(['show']);
+        Route::resource('faqs', \App\Http\Controllers\Admin\FaqController::class)->except(['show']);
+        Route::resource('teams', \App\Http\Controllers\Admin\TeamController::class)->except(['show']);
     });
 });

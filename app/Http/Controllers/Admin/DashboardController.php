@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
-use App\Models\{Banner, Service, Product, Contact, Quantum, Training, BlogPost};
+use App\Models\{Banner, Service, Product, Contact, Quantum, Training, BlogPost, Gallery, Faq, Team};
 
 class DashboardController extends Controller
 {
@@ -19,6 +19,9 @@ class DashboardController extends Controller
                 'training' => Training::count(),
                 'blog_posts' => BlogPost::count(),
                 'contacts' => Contact::count(),
+                'galleries' => Gallery::count(),
+                'faqs' => Faq::count(),
+                'teams' => Team::count(),
             ];
         });
 
