@@ -86,9 +86,9 @@
             @foreach([
                 ['label' => 'Home', 'url' => '/'],
                 ['label' => 'Quantum', 'url' => url('/quantum')],
-                ['label' => 'Services', 'url' => '/page'],
-                ['label' => 'Products', 'url' => '/page'],
-                ['label' => 'Training', 'url' => '/page'],
+                ['label' => 'Services', 'url' => '/services'],
+                ['label' => 'Products', 'url' => '/products'],
+                ['label' => 'Training', 'url' => '/training'],
                 ['label' => 'Blog', 'url' => '/page'],
                 ['label' => 'Contact Us', 'url' => '/page']
             ] as $item)

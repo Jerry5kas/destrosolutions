@@ -33,7 +33,16 @@
                 {{ $item ? Str::limit($item->description, 120) : 'Default description text.' }}
             </p>
             <ul class="space-y-2 text-sm text-gray-700 text-xs">
-                @if($item && isset($item->key_features) && count($item->key_features) > 0)
+                @if($type === 'training' && $item && isset($item->objectives) && is_array($item->objectives) && count($item->objectives) > 0)
+                    @foreach(array_slice($item->objectives, 0, 3) as $feature)
+                        <li class="flex items-start">
+                            <svg class="w-3.5 h-3.5 mt-0.5 mr-3 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span>{{ Str::limit($feature, 60) }}</span>
+                        </li>
+                    @endforeach
+                @elseif($item && isset($item->key_features) && is_array($item->key_features) && count($item->key_features) > 0)
                     @foreach(array_slice($item->key_features, 0, 3) as $feature)
                         <li class="flex items-start">
                             <svg class="w-3.5 h-3.5 mt-0.5 mr-3 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -42,7 +51,7 @@
                             <span>{{ Str::limit($feature, 60) }}</span>
                         </li>
                     @endforeach
-                @elseif($item && isset($item->features) && count($item->features) > 0)
+                @elseif($item && isset($item->features) && is_array($item->features) && count($item->features) > 0)
                     @foreach(array_slice($item->features, 0, 3) as $feature)
                         <li class="flex items-start">
                             <svg class="w-3.5 h-3.5 mt-0.5 mr-3 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -56,7 +65,7 @@
                         <svg class="w-3.5 h-3.5 mt-0.5 mr-3 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
-                        <span>Professional service delivery</span>
+                        <span>Professional delivery</span>
                     </li>
                     <li class="flex items-start">
                         <svg class="w-3.5 h-3.5 mt-0.5 mr-3 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

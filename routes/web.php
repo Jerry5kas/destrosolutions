@@ -10,6 +10,10 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/quantum', [ContentController::class, 'quantum'])->name('quantum');
 Route::get('/services', [ContentController::class, 'services'])->name('services');
 Route::get('/services/{subtitle}', [ContentController::class, 'servicesBySubtitle'])->name('services.subtitle');
+Route::get('/products', [ContentController::class, 'products'])->name('products');
+Route::get('/products/{subtitle}', [ContentController::class, 'productsBySubtitle'])->name('products.subtitle');
+Route::get('/training', [ContentController::class, 'trainings'])->name('training');
+Route::get('/training/{subtitle}', [ContentController::class, 'trainingsBySubtitle'])->name('training.subtitle');
 Route::get('/api/gallery-images', [ContentController::class, 'getGalleryImages'])->name('gallery.images');
 
 

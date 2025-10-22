@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -31,7 +32,18 @@ class HomeController extends Controller
             ];
         }
 
-        return view('welcome', ['slides' => $slides]);
+        // Get services grouped by subtitle for about section
+        $servicesBySubtitle = Service::where('is_active', true)
+            ->get()
+            ->groupBy('subtitle')
+            ->map(function ($services) {
+                return $services->take(6); // Limit to 6 services per category
+            });
+
+        return view('welcome', [
+            'slides' => $slides,
+            'servicesBySubtitle' => $servicesBySubtitle
+        ]);
     }
 }
 

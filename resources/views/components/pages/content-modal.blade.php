@@ -73,7 +73,7 @@
                         <div class="space-y-4">
                             <h4 class="text-xl font-semibold text-gray-900 flex items-center">
                                 <div class="w-1 h-6 bg-gradient-to-b from-green-500 to-emerald-600 rounded-full mr-3"></div>
-                                Key Features
+                                <span id="modal-features-title">Key Features</span>
                             </h4>
                             <ul id="modal-features" class="space-y-3">
                                 <!-- Features will be populated by JavaScript -->
@@ -212,12 +212,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update features - handle different feature field names
             const featuresList = document.getElementById('modal-features');
             featuresList.innerHTML = '';
+            const featuresTitle = document.getElementById('modal-features-title');
             
             let features = [];
-            if (itemData.key_features && itemData.key_features.length > 0) {
+            if (contentType === 'training' && itemData.objectives && itemData.objectives.length > 0) {
+                features = itemData.objectives;
+                featuresTitle.textContent = 'Objectives';
+            } else if (itemData.key_features && itemData.key_features.length > 0) {
                 features = itemData.key_features;
+                featuresTitle.textContent = 'Key Features';
             } else if (itemData.features && itemData.features.length > 0) {
                 features = itemData.features;
+                featuresTitle.textContent = 'Key Features';
             }
             
             if (features.length > 0) {

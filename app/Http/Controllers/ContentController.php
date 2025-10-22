@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Quantum;
 use App\Models\Gallery;
 use App\Models\Service;
+use App\Models\Product;
+use App\Models\Training;
 use Illuminate\Support\Str;
 
 class ContentController extends Controller
@@ -133,5 +135,137 @@ class ContentController extends Controller
         ];
 
         return view('service', compact('services', 'subtitles', 'galleryImages', 'galleries', 'originalSubtitle'));
+    }
+
+    /**
+     * Display the products page with all active products.
+     */
+    public function products()
+    {
+        $products = Product::where('is_active', true)->get();
+
+        $subtitles = Product::where('is_active', true)
+            ->distinct()
+            ->pluck('subtitle')
+            ->filter()
+            ->values();
+
+        $galleries = Gallery::active()->ordered()->get();
+
+        $galleryImages = [
+            ['src' => asset('images/car1.jpg'), 'alt' => 'Car 1', 'fallback' => 'https://picsum.photos/400/300?random=1'],
+            ['src' => asset('images/car2.jpg'), 'alt' => 'Car 2', 'fallback' => 'https://picsum.photos/400/300?random=2'],
+            ['src' => asset('images/car3.jpg'), 'alt' => 'Car 3', 'fallback' => 'https://picsum.photos/400/300?random=3'],
+            ['src' => asset('images/building1.jpg'), 'alt' => 'Building 1', 'fallback' => 'https://picsum.photos/400/300?random=4'],
+            ['src' => asset('images/building2.jpg'), 'alt' => 'Building 2', 'fallback' => 'https://picsum.photos/400/300?random=5'],
+            ['src' => asset('images/people1.jpg'), 'alt' => 'People 1', 'fallback' => 'https://picsum.photos/400/300?random=6'],
+        ];
+
+        return view('product', compact('products', 'subtitles', 'galleryImages', 'galleries'));
+    }
+
+    /**
+     * Display products filtered by subtitle.
+     */
+    public function productsBySubtitle($subtitle)
+    {
+        $originalSubtitle = Product::where('is_active', true)
+            ->get()
+            ->first(function ($product) use ($subtitle) {
+                return Str::slug($product->subtitle) === strtolower($subtitle);
+            })?->subtitle;
+
+        if (!$originalSubtitle) {
+            abort(404, 'Product category not found');
+        }
+
+        $products = Product::where('is_active', true)
+            ->where('subtitle', $originalSubtitle)
+            ->get();
+
+        $subtitles = Product::where('is_active', true)
+            ->distinct()
+            ->pluck('subtitle')
+            ->filter()
+            ->values();
+
+        $galleries = Gallery::active()->ordered()->get();
+
+        $galleryImages = [
+            ['src' => asset('images/car1.jpg'), 'alt' => 'Car 1', 'fallback' => 'https://picsum.photos/400/300?random=1'],
+            ['src' => asset('images/car2.jpg'), 'alt' => 'Car 2', 'fallback' => 'https://picsum.photos/400/300?random=2'],
+            ['src' => asset('images/car3.jpg'), 'alt' => 'Car 3', 'fallback' => 'https://picsum.photos/400/300?random=3'],
+            ['src' => asset('images/building1.jpg'), 'alt' => 'Building 1', 'fallback' => 'https://picsum.photos/400/300?random=4'],
+            ['src' => asset('images/building2.jpg'), 'alt' => 'Building 2', 'fallback' => 'https://picsum.photos/400/300?random=5'],
+            ['src' => asset('images/people1.jpg'), 'alt' => 'People 1', 'fallback' => 'https://picsum.photos/400/300?random=6'],
+        ];
+
+        return view('product', compact('products', 'subtitles', 'galleryImages', 'galleries', 'originalSubtitle'));
+    }
+
+    /**
+     * Display the training page with all active trainings.
+     */
+    public function trainings()
+    {
+        $trainings = Training::where('is_active', true)->get();
+
+        $subtitles = Training::where('is_active', true)
+            ->distinct()
+            ->pluck('subtitle')
+            ->filter()
+            ->values();
+
+        $galleries = Gallery::active()->ordered()->get();
+
+        $galleryImages = [
+            ['src' => asset('images/car1.jpg'), 'alt' => 'Car 1', 'fallback' => 'https://picsum.photos/400/300?random=1'],
+            ['src' => asset('images/car2.jpg'), 'alt' => 'Car 2', 'fallback' => 'https://picsum.photos/400/300?random=2'],
+            ['src' => asset('images/car3.jpg'), 'alt' => 'Car 3', 'fallback' => 'https://picsum.photos/400/300?random=3'],
+            ['src' => asset('images/building1.jpg'), 'alt' => 'Building 1', 'fallback' => 'https://picsum.photos/400/300?random=4'],
+            ['src' => asset('images/building2.jpg'), 'alt' => 'Building 2', 'fallback' => 'https://picsum.photos/400/300?random=5'],
+            ['src' => asset('images/people1.jpg'), 'alt' => 'People 1', 'fallback' => 'https://picsum.photos/400/300?random=6'],
+        ];
+
+        return view('training', compact('trainings', 'subtitles', 'galleryImages', 'galleries'));
+    }
+
+    /**
+     * Display trainings filtered by subtitle.
+     */
+    public function trainingsBySubtitle($subtitle)
+    {
+        $originalSubtitle = Training::where('is_active', true)
+            ->get()
+            ->first(function ($training) use ($subtitle) {
+                return Str::slug($training->subtitle) === strtolower($subtitle);
+            })?->subtitle;
+
+        if (!$originalSubtitle) {
+            abort(404, 'Training category not found');
+        }
+
+        $trainings = Training::where('is_active', true)
+            ->where('subtitle', $originalSubtitle)
+            ->get();
+
+        $subtitles = Training::where('is_active', true)
+            ->distinct()
+            ->pluck('subtitle')
+            ->filter()
+            ->values();
+
+        $galleries = Gallery::active()->ordered()->get();
+
+        $galleryImages = [
+            ['src' => asset('images/car1.jpg'), 'alt' => 'Car 1', 'fallback' => 'https://picsum.photos/400/300?random=1'],
+            ['src' => asset('images/car2.jpg'), 'alt' => 'Car 2', 'fallback' => 'https://picsum.photos/400/300?random=2'],
+            ['src' => asset('images/car3.jpg'), 'alt' => 'Car 3', 'fallback' => 'https://picsum.photos/400/300?random=3'],
+            ['src' => asset('images/building1.jpg'), 'alt' => 'Building 1', 'fallback' => 'https://picsum.photos/400/300?random=4'],
+            ['src' => asset('images/building2.jpg'), 'alt' => 'Building 2', 'fallback' => 'https://picsum.photos/400/300?random=5'],
+            ['src' => asset('images/people1.jpg'), 'alt' => 'People 1', 'fallback' => 'https://picsum.photos/400/300?random=6'],
+        ];
+
+        return view('training', compact('trainings', 'subtitles', 'galleryImages', 'galleries', 'originalSubtitle'));
     }
 }
