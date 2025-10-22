@@ -1,10 +1,10 @@
 <x-layouts.app>
-    <x-pages.hero title="Quantum"
-                  desc="Securing chip-to-cloud in Quantum era"/>
+    <x-pages.hero title="Empowering Next-Gen Mobility & Security"
+                  desc="DestroSolutions drives innovation across automotive, avionics, rail, and healthcare with secure, software-defined, and compliant digital transformation solutions."/>
     <x-pages.mockup :galleries="$galleries"/>
-    <x-pages.link />
-    <x-pages.content :items="$quantumContent" title="Our Quantum Solutions"
-                     desc="Delivering quantum-secured, intelligent, and resilient chip-to-cloud solutions—driving safety, innovation, and transformation across automotive and connected industries."
-                     type="quantum"/>
+    <x-pages.link :subtitles="$subtitles" :currentSubtitle="$originalSubtitle ?? null" baseUrl="/services" />
+    <x-pages.content :items="$services" title="Our Services"
+                     desc="Comprehensive solutions across automotive, avionics, railways, and healthcare sectors—delivering security, compliance, and innovation for next-generation systems."
+                     type="service"/>
     <x-pages.content-modal/>
 </x-layouts.app>
