@@ -1,12 +1,11 @@
 import './bootstrap';
-import Alpine from 'alpinejs';
 import './loading-helpers';
 import './search-functionality';
 import './reveal';
 import './cursor';
 
-// Import simple GSAP animations (non-conflicting)
-import './animations/simple-gsap.js';
+// Import GSAP for hero animations
+import gsap from 'gsap';
 
-window.Alpine = Alpine;
-Alpine.start();
+// Make GSAP globally available
+window.gsap = gsap;

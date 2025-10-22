@@ -8,8 +8,8 @@
             <x-partials.about />
         </div>
 
-        <div class="border border-t border-b border-gray-300 py-6 xs:py-8 sm:py-10 md:py-16 lg:py-20 my-6 xs:my-8 sm:my-10 md:my-16 lg:my-20 bg-blue-700" data-reveal data-gsap-reveal data-gsap-direction="up" data-gsap-delay="0.4">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 xs:gap-6 sm:gap-8 md:gap-6 lg:gap-8 max-w-xs xs:max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto h-full px-3 xs:px-4 sm:px-6">
+        <div class="border border-t border-b border-gray-300 py-6 sm:py-10 md:py-16 lg:py-20 my-6 sm:my-10 md:my-16 lg:my-20 bg-blue-700" data-reveal data-gsap-reveal data-gsap-direction="up" data-gsap-delay="0.4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-8 md:gap-6 lg:gap-8 max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl mx-auto h-full px-4 sm:px-6">
                 <div class="w-full md:w-auto" data-reveal data-gsap-reveal data-gsap-direction="left" data-gsap-delay="0.6">
                     <x-partials.stats count="50+" text="Deployements" tag="Vehicle innovations now come from software-based features" />
                 </div>

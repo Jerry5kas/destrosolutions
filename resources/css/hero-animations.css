@@ -1,0 +1,92 @@
+/* Hero Text Animations - CSS-based for Alpine.js compatibility */
+
+/* Letter-by-letter animation for titles */
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) rotateX(90deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-150px) rotateY(-15deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(150px) rotateY(15deg) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg) scale(1);
+  }
+}
+
+/* Hero animation classes */
+.hero-title {
+  perspective: 1000px;
+}
+
+.hero-title .letter {
+  display: inline-block;
+  opacity: 0;
+  animation: letterReveal 0.8s ease-out forwards;
+  animation-delay: calc(var(--letter-delay, 0) * 0.05s + 0.3s);
+  transform-origin: 50% 50% -50px;
+}
+
+.hero-subtitle {
+  opacity: 0;
+  animation: slideInLeft 1.2s ease-out forwards;
+  animation-delay: 1.0s;
+}
+
+.hero-button {
+  opacity: 0;
+  animation: slideInRight 1.2s ease-out forwards;
+  animation-delay: 1.4s;
+}
+
+/* Animation states for different slides */
+.hero-slide-enter .hero-title .letter {
+  animation-play-state: running;
+}
+
+.hero-slide-enter .hero-subtitle {
+  animation-play-state: running;
+}
+
+.hero-slide-enter .hero-button {
+  animation-play-state: running;
+}
+
+/* Reset animations for slide changes */
+.hero-slide-exit .hero-title .letter {
+  opacity: 0;
+  transform: translateY(50px) rotateX(90deg);
+  animation-play-state: paused;
+}
+
+.hero-slide-exit .hero-subtitle {
+  opacity: 0;
+  transform: translateX(-150px) rotateY(-15deg);
+  animation-play-state: paused;
+}
+
+.hero-slide-exit .hero-button {
+  opacity: 0;
+  transform: translateX(150px) rotateY(15deg) scale(0.8);
+  animation-play-state: paused;
+}

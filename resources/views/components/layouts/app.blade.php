@@ -37,19 +37,17 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 
-    <!-- Alpine.js (Include this in your layout before the closing </body>) -->
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <!-- Alpine.js removed to prevent conflicts with GSAP -->
 </head>
-<body class="smooth-scroll">
+<body class="smooth-scroll overflow-x-hidden">
 
 <!-- Header -->
 
 
 <!-- Header -->
-<nav x-data="{ open: false }"
-     class="fixed top-0 left-0 w-full z-50 px-4 py-3 border-b border-gray-300 font-exo-2 bg-white ">
+<nav class="fixed top-0 left-0 w-full z-50 px-4 py-3 border-b border-gray-300 font-exo-2 bg-white overflow-hidden">
 
-    <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-2 ">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-2">
         <!-- Logo -->
         <div class="flex items-center space-x-2 relative">
             <img class="w-7 h-7" src="{{ asset('images/letter-d.png') }}" alt="Logo"/>
@@ -58,39 +56,18 @@
       </span>
         </div>
 
-        <!-- Hamburger button (mobile) -->
-        <div class="md:hidden">
-            <button @click="open = !open" class="focus:outline-none">
-                <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                     viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-                <svg x-show="open" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
-                     viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
-        </div>
-
         <!-- Desktop Navigation -->
-        <div
-            x-data="{ openDropdown: null }"
-            class="hidden md:flex space-x-10 items-center font-semibold relative"
-        >
+        <div class="hidden md:flex space-x-8 items-center font-semibold relative">
             @foreach([
                 ['label' => 'Home', 'url' => '/'],
                 ['label' => 'Quantum', 'url' => url('/page')],
-                ['label' => 'Services', 'url' => '/page', 'dropdown' => 'services'],
-                ['label' => 'Products', 'url' => '/page', 'dropdown' => 'products'],
-                ['label' => 'Training', 'url' => '/page', 'dropdown' => 'training'],
+                ['label' => 'Services', 'url' => '/page'],
+                ['label' => 'Products', 'url' => '/page'],
+                ['label' => 'Training', 'url' => '/page'],
                 ['label' => 'Blog', 'url' => '/page'],
                 ['label' => 'Contact Us', 'url' => '/page']
             ] as $item)
-                <div
-                    class="relative group"
-                    @mouseenter="openDropdown = '{{ $item['dropdown'] ?? '' }}'"
-                    @mouseleave="openDropdown = null"
-                >
+                <div class="relative group">
                     <!-- Link -->
                     <a href="{{ $item['url'] }}"
                        class="text-sm text-gray-600 hover:text-black relative pb-2 transition-colors duration-300">
@@ -98,180 +75,10 @@
                         <!-- Underline animation -->
                         <span class="absolute left-0 bottom-0 w-0 h-[2px] bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
                     </a>
-
-                    <!-- ===== SERVICES DROPDOWN ===== -->
-                    @if(($item['dropdown'] ?? '') === 'services')
-                        <div
-                            x-show="openDropdown === 'services'"
-                            x-cloak
-                            x-transition:enter="transition ease-out duration-200"
-                            x-transition:enter-start="opacity-0 translate-y-2 scale-95"
-                            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                            x-transition:leave="transition ease-in duration-150"
-                            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                            x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-                            class="absolute left-0 mt-3 w-max min-w-[280px] max-w-[640px] origin-top bg-white/90 backdrop-blur-md shadow-xl rounded-2xl border border-gray-200 py-5 px-6 z-50"
-                        >
-                            <div class="grid grid-cols-1 gap-6">
-                                <div class="space-y-3">
-                                    <h4 class="text-sm font-semibold text-gray-800">Services</h4>
-                                    <a href="#" class="group flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>
-                                        Automative
-                                    </a>
-                                    <a href="#" class="group flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>
-                                        SDV
-                                    </a>
-                                    <a href="#" class="group flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>
-                                        avionics
-                                    </a>
-                                    <a href="#" class="group flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>
-                                        railways
-                                    </a>
-                                    <a href="#" class="group flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>
-                                        Health Car and Medical services
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    <!-- ===== PRODUCTS DROPDOWN ===== -->
-                    @if(($item['dropdown'] ?? '') === 'products')
-                        <div
-                            x-show="openDropdown === 'products'"
-                            x-cloak
-                            x-transition:enter="transition ease-out duration-200"
-                            x-transition:enter-start="opacity-0 translate-y-2 scale-95"
-                            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                            x-transition:leave="transition ease-in duration-150"
-                            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                            x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-                            class="absolute left-0 mt-3 w-max min-w-[320px] max-w-[720px] origin-top bg-white/90 backdrop-blur-md shadow-xl rounded-2xl border border-gray-200 py-5 px-6 z-50"
-                        >
-                            <div class="grid grid-cols-1 gap-6">
-                                <div class="space-y-3">
-                                    <h4 class="text-sm font-semibold text-gray-800">Products</h4>
-                                    <a href="#" class="group flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>
-                                        Automator AI
-                                    </a>
-                                    <a href="#" class="group flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>
-                                        IDPS
-                                    </a>
-                                    <a href="#" class="group flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>
-                                        AI Data Collector
-                                    </a>
-                                    <a href="#" class="group flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>
-                                        SBOM (Software Bill of Materials)
-                                    </a>
-                                    <a href="#" class="group flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>
-                                        Vehicle Security Operation Center (vSOC)
-                                    </a>
-                                    <a href="#" class="group flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>
-                                        OTA Updater
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
-                    <!-- ===== TRAINING DROPDOWN ===== -->
-                    @if(($item['dropdown'] ?? '') === 'training')
-                        <div
-                            x-show="openDropdown === 'training'"
-                            x-cloak
-                            x-transition:enter="transition ease-out duration-200"
-                            x-transition:enter-start="opacity-0 translate-y-2 scale-95"
-                            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                            x-transition:leave="transition ease-in duration-150"
-                            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                            x-transition:leave-end="opacity-0 translate-y-2 scale-95"
-                            class="absolute left-0 mt-3 w-max min-w-[280px] max-w-[560px] origin-top bg-white/90 backdrop-blur-md shadow-xl rounded-2xl border border-gray-200 py-5 px-6 z-50"
-                        >
-                            <div class="grid grid-cols-1 gap-6">
-                                <div class="space-y-3">
-                                    <h4 class="text-sm font-semibold text-gray-800">Training</h4>
-                                    <a href="#" class="group flex items-center gap-2 p-2 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>
-                                        Automative
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
                 </div>
             @endforeach
         </div>
 
-    </div>
-
-    <!-- Mobile Nav -->
-    <div x-show="open" x-transition x-cloak class="md:hidden mt-3 px-2">
-        <div class="space-y-1">
-            <a class="block text-sm text-gray-700 hover:text-black py-2" href="#">Home</a>
-            <a class="block text-sm text-gray-700 hover:text-black py-2" href="#">Quantum</a>
-
-            <!-- Services mobile submenu -->
-            <div x-data="{ open: false }" class="border-t border-gray-200 pt-1">
-                <button @click="open = !open" class="w-full flex items-center justify-between py-2 text-sm text-gray-700 hover:text-black">
-                    <span>Services</span>
-                    <svg :class="{ 'rotate-180': open }" class="w-4 h-4 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div x-show="open" x-cloak x-transition class="pl-3 space-y-1">
-                    <a href="#" class="group flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>Automative</a>
-                    <a href="#" class="group flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>SDV</a>
-                    <a href="#" class="group flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>avionics</a>
-                    <a href="#" class="group flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>railways</a>
-                    <a href="#" class="group flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>Health Car and Medical services</a>
-                </div>
-            </div>
-
-            <!-- Products mobile submenu -->
-            <div x-data="{ open: false }" class="border-t border-gray-200 pt-1">
-                <button @click="open = !open" class="w-full flex items-center justify-between py-2 text-sm text-gray-700 hover:text-black">
-                    <span>Products</span>
-                    <svg :class="{ 'rotate-180': open }" class="w-4 h-4 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div x-show="open" x-cloak x-transition class="pl-3 space-y-1">
-                    <a href="#" class="group flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>Automator AI</a>
-                    <a href="#" class="group flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>IDPS</a>
-                    <a href="#" class="group flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>AI Data Collector</a>
-                    <a href="#" class="group flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>SBOM (Software Bill of Materials)</a>
-                    <a href="#" class="group flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>Vehicle Security Operation Center (vSOC)</a>
-                    <a href="#" class="group flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>OTA Updater</a>
-                </div>
-            </div>
-
-            <!-- Training mobile submenu -->
-            <div x-data="{ open: false }" class="border-t border-gray-200 pt-1">
-                <button @click="open = !open" class="w-full flex items-center justify-between py-2 text-sm text-gray-700 hover:text-black">
-                    <span>Training</span>
-                    <svg :class="{ 'rotate-180': open }" class="w-4 h-4 text-gray-500 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div x-show="open" x-cloak x-transition class="pl-3 space-y-1">
-                    <a href="#" class="group flex items-center gap-2 py-1.5 text-sm text-gray-600 hover:text-blue-600"><span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-blue-600 ring-2 ring-blue-100 shrink-0"></span>Automative</a>
-                </div>
-            </div>
-
-            <a class="block text-sm text-gray-700 hover:text-black py-2 border-t border-gray-200" href="#">Blog</a>
-            <a class="block text-sm text-gray-700 hover:text-black py-2" href="#">Contact Us</a>
-        </div>
     </div>
 </nav>
 
