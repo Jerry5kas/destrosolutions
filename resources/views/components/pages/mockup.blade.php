@@ -40,147 +40,225 @@
 </style>
 <div class="text-white flex items-center justify-center px-4 sm:px-6 lg:px-8">
 
-<div x-data="gallery()" x-init="init()" class="w-full max-w-6xl mx-auto overflow-hidden relative pt-8 sm:pt-12">
+<div class="gallery-container w-full max-w-6xl mx-auto overflow-hidden relative pt-8 sm:pt-12">
     <!-- Gallery Row -->
-    <div class="flex gap-2 sm:gap-4 animate-scroll" x-ref="slider">
-        <!-- Duplicate images twice for seamless looping -->
-        <template x-for="(img, index) in images.concat(images)" :key="index">
-            <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex-shrink-0 cursor-pointer" @click="openLightbox(index % images.length)">
-                <img :src="img" class="w-full h-32 sm:h-40 md:h-48 lg:h-56 object-cover rounded-lg shadow-lg hover:opacity-80 transition-all duration-300">
-            </div>
-        </template>
+    <div class="flex gap-2 sm:gap-4 animate-scroll" id="gallery-slider">
+        <!-- Images will be populated by JavaScript -->
     </div>
 
     <!-- Lightbox Overlay -->
-    <div x-show="lightboxOpen" x-transition
-         class="fixed inset-0 bg-black/90 flex items-center justify-center z-50 lightbox-touch"
-         @click="closeLightbox"
-         @touchstart="handleTouchStart"
-         @touchend="handleTouchEnd">
-        <div class="relative w-full max-w-4xl mx-4" @click.stop>
+    <div id="lightbox-overlay" class="lightbox-overlay fixed inset-0 bg-black/90 flex items-center justify-center z-50 lightbox-touch hidden">
+        <div class="relative w-full max-w-4xl mx-4">
             <!-- Navigation buttons - hidden on mobile, shown on desktop -->
-            <button @click="prevImage"
-                    class="hidden sm:block absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 p-2 sm:p-3 rounded-full text-white text-lg sm:text-xl z-10">
+            <button id="prev-btn" class="hidden sm:block absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 p-2 sm:p-3 rounded-full text-white text-lg sm:text-xl z-10">
                 ◀
             </button>
-            <button @click="nextImage"
-                    class="hidden sm:block absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 p-2 sm:p-3 rounded-full text-white text-lg sm:text-xl z-10">
+            <button id="next-btn" class="hidden sm:block absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 p-2 sm:p-3 rounded-full text-white text-lg sm:text-xl z-10">
                 ▶
             </button>
 
             <!-- Main image -->
-            <img :src="images[currentIndex]"
-                 class="w-full max-h-[85vh] sm:max-h-[80vh] object-contain rounded-lg shadow-2xl">
+            <img id="lightbox-image" src="" class="w-full max-h-[85vh] sm:max-h-[80vh] object-contain rounded-lg shadow-2xl">
 
             <!-- Close button -->
-            <button @click="closeLightbox"
-                    class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-gray-100/40 hover:bg-gray-100 text-black p-2 sm:p-3 rounded-full text-lg sm:text-xl font-semibold z-10">
+            <button id="close-lightbox" class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-gray-100/40 hover:bg-gray-100 text-black p-2 sm:p-3 rounded-full text-lg sm:text-xl font-semibold z-10">
                 ✕
             </button>
 
             <!-- Mobile navigation dots -->
-            <div class="sm:hidden flex justify-center mt-4 space-x-2">
-                <template x-for="(img, index) in images" :key="index">
-                    <button @click="currentIndex = index"
-                            :class="currentIndex === index ? 'bg-white' : 'bg-white/40'"
-                            class="w-2 h-2 rounded-full transition-all duration-300"></button>
-                </template>
+            <div id="mobile-dots" class="sm:hidden flex justify-center mt-4 space-x-2">
+                <!-- Dots will be populated by JavaScript -->
             </div>
 
             <!-- Image counter for mobile -->
             <div class="sm:hidden absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-                <span x-text="currentIndex + 1"></span> / <span x-text="images.length"></span>
+                <span id="current-index">1</span> / <span id="total-images">1</span>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    function gallery() {
-        return {
-            images: [
-                "https://picsum.photos/id/1015/600/400",
-                "https://picsum.photos/id/1025/600/400",
-                "https://picsum.photos/id/1035/600/400",
-                "https://picsum.photos/id/1045/600/400",
-                "https://picsum.photos/id/1055/600/400",
-                "https://picsum.photos/id/1065/600/400",
-            ],
-            lightboxOpen: false,
-            currentIndex: 0,
-            touchStartX: 0,
-            touchStartY: 0,
-            touchEndX: 0,
-            touchEndY: 0,
-
-            openLightbox(index) {
-                this.currentIndex = index;
-                this.lightboxOpen = true;
-                // Prevent body scroll when lightbox is open
-                document.body.style.overflow = 'hidden';
-            },
-
-            closeLightbox() {
-                this.lightboxOpen = false;
-                // Restore body scroll
-                document.body.style.overflow = 'auto';
-            },
-
-            nextImage() {
-                this.currentIndex = (this.currentIndex + 1) % this.images.length;
-            },
-
-            prevImage() {
-                this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
-            },
-
-            // Touch gesture handling for mobile navigation
-            handleTouchStart(event) {
-                this.touchStartX = event.touches[0].clientX;
-                this.touchStartY = event.touches[0].clientY;
-            },
-
-            handleTouchEnd(event) {
-                this.touchEndX = event.changedTouches[0].clientX;
-                this.touchEndY = event.changedTouches[0].clientY;
-                this.handleSwipe();
-            },
-
-            handleSwipe() {
-                const deltaX = this.touchEndX - this.touchStartX;
-                const deltaY = this.touchEndY - this.touchStartY;
-                const minSwipeDistance = 50;
-
-                // Only process horizontal swipes (ignore vertical scrolling)
-                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
-                    if (deltaX > 0) {
-                        // Swipe right - go to previous image
-                        this.prevImage();
-                    } else {
-                        // Swipe left - go to next image
-                        this.nextImage();
-                    }
-                }
-            },
-
-            // Keyboard navigation support
-            init() {
-                this.$nextTick(() => {
-                    document.addEventListener('keydown', (e) => {
-                        if (this.lightboxOpen) {
-                            if (e.key === 'ArrowLeft') {
-                                this.prevImage();
-                            } else if (e.key === 'ArrowRight') {
-                                this.nextImage();
-                            } else if (e.key === 'Escape') {
-                                this.closeLightbox();
-                            }
-                        }
-                    });
-                });
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Initializing Gallery System');
+    
+    // Gallery data
+    const images = [
+        "https://picsum.photos/id/1015/600/400",
+        "https://picsum.photos/id/1025/600/400",
+        "https://picsum.photos/id/1035/600/400",
+        "https://picsum.photos/id/1045/600/400",
+        "https://picsum.photos/id/1055/600/400",
+        "https://picsum.photos/id/1065/600/400",
+    ];
+    
+    let currentIndex = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    
+    // DOM elements
+    const slider = document.getElementById('gallery-slider');
+    const lightboxOverlay = document.getElementById('lightbox-overlay');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const closeBtn = document.getElementById('close-lightbox');
+    const mobileDots = document.getElementById('mobile-dots');
+    const currentIndexSpan = document.getElementById('current-index');
+    const totalImagesSpan = document.getElementById('total-images');
+    
+    // Initialize gallery
+    function initGallery() {
+        console.log('Setting up gallery with', images.length, 'images');
+        
+        // Populate slider with images (duplicate for seamless loop)
+        slider.innerHTML = '';
+        [...images, ...images].forEach((img, index) => {
+            const div = document.createElement('div');
+            div.className = 'w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex-shrink-0 cursor-pointer';
+            div.innerHTML = `<img src="${img}" class="w-full h-32 sm:h-40 md:h-48 lg:h-56 object-cover rounded-lg shadow-lg hover:opacity-80 transition-all duration-300">`;
+            div.addEventListener('click', () => openLightbox(index % images.length));
+            slider.appendChild(div);
+        });
+        
+        // Populate mobile dots
+        mobileDots.innerHTML = '';
+        images.forEach((img, index) => {
+            const dot = document.createElement('button');
+            dot.className = 'w-2 h-2 rounded-full transition-all duration-300 bg-white/40';
+            dot.addEventListener('click', () => setCurrentIndex(index));
+            mobileDots.appendChild(dot);
+        });
+        
+        // Update total images counter
+        totalImagesSpan.textContent = images.length;
+        
+        // Add event listeners
+        prevBtn.addEventListener('click', prevImage);
+        nextBtn.addEventListener('click', nextImage);
+        closeBtn.addEventListener('click', closeLightbox);
+        
+        // Close lightbox when clicking overlay
+        lightboxOverlay.addEventListener('click', function(e) {
+            if (e.target === lightboxOverlay) {
+                closeLightbox();
+            }
+        });
+        
+        // Touch events
+        lightboxOverlay.addEventListener('touchstart', handleTouchStart);
+        lightboxOverlay.addEventListener('touchend', handleTouchEnd);
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', handleKeydown);
+        
+        console.log('Gallery initialized successfully');
+    }
+    
+    // Open lightbox
+    function openLightbox(index) {
+        console.log('Opening lightbox for image', index);
+        currentIndex = index;
+        lightboxImage.src = images[currentIndex];
+        lightboxOverlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        updateMobileDots();
+        updateCounter();
+    }
+    
+    // Close lightbox
+    function closeLightbox() {
+        console.log('Closing lightbox');
+        lightboxOverlay.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Next image
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        lightboxImage.src = images[currentIndex];
+        updateMobileDots();
+        updateCounter();
+    }
+    
+    // Previous image
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        lightboxImage.src = images[currentIndex];
+        updateMobileDots();
+        updateCounter();
+    }
+    
+    // Set current index
+    function setCurrentIndex(index) {
+        currentIndex = index;
+        lightboxImage.src = images[currentIndex];
+        updateMobileDots();
+        updateCounter();
+    }
+    
+    // Update mobile dots
+    function updateMobileDots() {
+        const dots = mobileDots.querySelectorAll('button');
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+                dot.className = 'w-2 h-2 rounded-full transition-all duration-300 bg-white';
+            } else {
+                dot.className = 'w-2 h-2 rounded-full transition-all duration-300 bg-white/40';
+            }
+        });
+    }
+    
+    // Update counter
+    function updateCounter() {
+        currentIndexSpan.textContent = currentIndex + 1;
+    }
+    
+    // Touch handling
+    function handleTouchStart(event) {
+        touchStartX = event.touches[0].clientX;
+        touchStartY = event.touches[0].clientY;
+    }
+    
+    function handleTouchEnd(event) {
+        touchEndX = event.changedTouches[0].clientX;
+        touchEndY = event.changedTouches[0].clientY;
+        handleSwipe();
+    }
+    
+    function handleSwipe() {
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+        const minSwipeDistance = 50;
+        
+        // Only process horizontal swipes
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+            if (deltaX > 0) {
+                prevImage();
+            } else {
+                nextImage();
             }
         }
     }
+    
+    // Keyboard handling
+    function handleKeydown(e) {
+        if (!lightboxOverlay.classList.contains('hidden')) {
+            if (e.key === 'ArrowLeft') {
+                prevImage();
+            } else if (e.key === 'ArrowRight') {
+                nextImage();
+            } else if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        }
+    }
+    
+    // Initialize the gallery
+    initGallery();
+});
 </script>
 
 </div>

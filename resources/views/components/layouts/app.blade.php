@@ -171,17 +171,22 @@
             console.log('Checking if data is ready');
             
             // Check for key elements that indicate page is loaded
-            const hasHeroSection = document.querySelector('.hero-section');
             const hasNavigation = document.querySelector('nav');
             const hasMainContent = document.querySelector('main');
             
-            const isReady = hasHeroSection && hasNavigation && hasMainContent;
+            // Check for any page content (hero section, page sections, or content)
+            const hasPageContent = document.querySelector('.hero-section') || 
+                                 document.querySelector('section') || 
+                                 document.querySelector('.gallery-container') ||
+                                 document.querySelector('.content-card');
+            
+            const isReady = hasNavigation && hasMainContent && hasPageContent;
             
             if (isReady) {
-              console.log('Data is ready');
+              console.log('Data is ready - Navigation:', !!hasNavigation, 'Main:', !!hasMainContent, 'Content:', !!hasPageContent);
               isDataReady = true;
             } else {
-              console.log('Data not ready, continuing to check...');
+              console.log('Data not ready - Navigation:', !!hasNavigation, 'Main:', !!hasMainContent, 'Content:', !!hasPageContent);
             }
             
             return isReady;
