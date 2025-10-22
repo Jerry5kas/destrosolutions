@@ -13,10 +13,10 @@
     <!-- Text Content -->
     <div class="absolute inset-0 flex flex-col justify-center items-start px-4 sm:px-8 md:px-12 lg:px-20">
         <div class="max-w-xl text-white">
-            <h1 class="font-roboto-slab text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold mb-2 leading-tight">
+            <h1 class="font-roboto-slab text-2xl xs:text-3xl sm:text-4xl md:text-6xl font-bold mb-2 leading-tight">
                 {{$title}}
             </h1>
-            <p class="text-sm xs:text-base sm:text-lg text-gray-200 leading-relaxed">
+            <p class="text-sm xs:text-base sm:text-xl text-gray-200 leading-relaxed">
                 {{$desc}}
 
             </p>

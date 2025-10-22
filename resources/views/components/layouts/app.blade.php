@@ -49,7 +49,7 @@
               <img class="w-10 h-10" src="{{ asset('images/letter-d.png') }}" alt="Logo"/>
               <span class="text-xl font-bold text-white -ml-1">ESTROSOLUTIONS</span>
             </div>
-            
+
             <!-- Running Car Animation -->
             <div class="car-container relative w-full h-16 mx-auto overflow-hidden">
               <div class="car-track absolute inset-0 flex items-center justify-center">
@@ -71,18 +71,21 @@
 
     <div class="max-w-7xl mx-auto flex items-center justify-between px-4 py-2">
         <!-- Logo -->
+        <a href="{{ url('/') }}">
+
         <div class="flex items-center space-x-2 relative">
             <img class="w-7 h-7" src="{{ asset('images/letter-d.png') }}" alt="Logo"/>
             <span class=" absolute left-6 text-lg font-semibold tracking-wide">
         ESTROSOLUTIONS
       </span>
         </div>
+        </a>
 
         <!-- Desktop Navigation -->
         <div class="hidden md:flex space-x-8 items-center font-semibold relative">
             @foreach([
                 ['label' => 'Home', 'url' => '/'],
-                ['label' => 'Quantum', 'url' => url('/page')],
+                ['label' => 'Quantum', 'url' => url('/quantum')],
                 ['label' => 'Services', 'url' => '/page'],
                 ['label' => 'Products', 'url' => '/page'],
                 ['label' => 'Training', 'url' => '/page'],
@@ -134,13 +137,13 @@
         // Global Loading System with Rules
         document.addEventListener('DOMContentLoaded', function() {
           console.log('Initializing global loading system with rules');
-          
+
           const loadingOverlay = document.getElementById('global-loading-overlay');
           let isDataReady = false;
           let minLoadingTime = 2000; // Compulsory 2 seconds
           let loadingStartTime = Date.now();
           let loadingInterval = null;
-          
+
           // Show loading initially
           function showLoading() {
             if (loadingOverlay) {
@@ -150,7 +153,7 @@
               console.log('Global loading shown');
             }
           }
-          
+
           // Hide loading with zoom-out fade effect
           function hideLoading() {
             if (loadingOverlay) {
@@ -158,50 +161,50 @@
               loadingOverlay.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
               loadingOverlay.style.opacity = '0';
               loadingOverlay.style.transform = 'scale(1.1)'; // Zoom out effect
-              
+
               setTimeout(() => {
                 loadingOverlay.style.display = 'none';
                 console.log('Global loading hidden');
               }, 1000);
             }
           }
-          
+
           // Check if data is ready
           function checkDataReady() {
             console.log('Checking if data is ready');
-            
+
             // Check for key elements that indicate page is loaded
             const hasNavigation = document.querySelector('nav');
             const hasMainContent = document.querySelector('main');
-            
+
             // Check for any page content (hero section, page sections, or content)
-            const hasPageContent = document.querySelector('.hero-section') || 
-                                 document.querySelector('section') || 
+            const hasPageContent = document.querySelector('.hero-section') ||
+                                 document.querySelector('section') ||
                                  document.querySelector('.gallery-container') ||
                                  document.querySelector('.content-card');
-            
+
             const isReady = hasNavigation && hasMainContent && hasPageContent;
-            
+
             if (isReady) {
               console.log('Data is ready - Navigation:', !!hasNavigation, 'Main:', !!hasMainContent, 'Content:', !!hasPageContent);
               isDataReady = true;
             } else {
               console.log('Data not ready - Navigation:', !!hasNavigation, 'Main:', !!hasMainContent, 'Content:', !!hasPageContent);
             }
-            
+
             return isReady;
           }
-          
+
           // Continuous loading loop
           function startLoadingLoop() {
             console.log('Starting continuous loading loop');
-            
+
             loadingInterval = setInterval(() => {
               const elapsedTime = Date.now() - loadingStartTime;
               const hasMinTimePassed = elapsedTime >= minLoadingTime;
-              
+
               console.log(`Loading check - Elapsed: ${elapsedTime}ms, Min time: ${minLoadingTime}ms, Data ready: ${isDataReady}`);
-              
+
               // Only hide if both conditions are met:
               // 1. Minimum 2 seconds have passed
               // 2. Data is ready
@@ -217,13 +220,13 @@
               }
             }, 100); // Check every 100ms
           }
-          
+
           // Show loading initially
           showLoading();
-          
+
           // Start the loading loop
           startLoadingLoop();
-          
+
           // Make functions globally available
           window.globalLoading = {
             show: showLoading,

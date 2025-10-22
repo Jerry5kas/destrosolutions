@@ -17,7 +17,7 @@ class Training extends Model
     ];
 
     protected $fillable = [
-        'title', 'description', 'objectives', 'image', 'is_active'
+        'title', 'subtitle', 'description', 'objectives', 'image', 'is_active'
     ];
 }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Quantum;
+use App\Models\Gallery;
 
 class ContentController extends Controller
 {
@@ -13,6 +14,9 @@ class ContentController extends Controller
     public function quantum()
     {
         $quantumContent = Quantum::where('is_active', true)->get();
+        
+        // Fetch active galleries ordered by sort_order
+        $galleries = Gallery::active()->ordered()->get();
 
         $galleryImages = [
             ['src' => asset('images/car1.jpg'), 'alt' => 'Car 1', 'fallback' => 'https://picsum.photos/400/300?random=1'],
@@ -23,7 +27,7 @@ class ContentController extends Controller
             ['src' => asset('images/people1.jpg'), 'alt' => 'People 1', 'fallback' => 'https://picsum.photos/400/300?random=6'],
         ];
 
-        return view('quantum', compact('quantumContent', 'galleryImages'));
+        return view('quantum', compact('quantumContent', 'galleryImages', 'galleries'));
     }
 
     /**

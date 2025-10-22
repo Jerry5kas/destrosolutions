@@ -10,6 +10,15 @@
                 @enderror
             </div>
             <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Subtitle</label>
+                <input name="subtitle" value="{{ old('subtitle') }}" class="input-field {{ $errors->has('subtitle') ? 'input-error' : '' }}" placeholder="Enter product subtitle" />
+                @error('subtitle')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Image</label>
                 <input type="file" name="image" class="input-field" accept="image/*" />
                 @error('image')

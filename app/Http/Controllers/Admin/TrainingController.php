@@ -24,6 +24,7 @@ class TrainingController extends Controller
     {
         $data = $request->validate([
             'title' => ['required','string','max:255'],
+            'subtitle' => ['nullable','string','max:255'],
             'description' => ['nullable','string'],
             'objectives' => ['nullable','array'],
             'objectives.*' => ['nullable','string','max:255'],
@@ -47,6 +48,7 @@ class TrainingController extends Controller
     {
         $data = $request->validate([
             'title' => ['required','string','max:255'],
+            'subtitle' => ['nullable','string','max:255'],
             'description' => ['nullable','string'],
             'objectives' => ['nullable','array'],
             'objectives.*' => ['nullable','string','max:255'],

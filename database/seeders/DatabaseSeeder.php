@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             QuantumSeeder::class,
+            GallerySeeder::class,
+            ServiceSeeder::class,
         ]);
     }
 }

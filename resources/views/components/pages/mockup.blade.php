@@ -1,3 +1,26 @@
+@props(['galleries' => []])
+
+{{--
+    Gallery Mockup Component
+    
+    This component displays a dynamic image gallery with infinite scroll animation
+    and lightbox functionality. It integrates with the Gallery model to fetch
+    active galleries ordered by sort_order.
+    
+    Usage:
+    <x-pages.mockup :galleries="$galleries" />
+    
+    The component expects $galleries variable to be passed from the controller:
+    $galleries = Gallery::active()->ordered()->get();
+    
+    Features:
+    - Infinite scroll animation
+    - Lightbox with navigation
+    - Touch/swipe support for mobile
+    - Keyboard navigation
+    - Error handling with fallback images
+    - Responsive design
+--}}
 <style>
     /* Infinite scroll animation */
     @keyframes scroll {
@@ -82,15 +105,41 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Initializing Gallery System');
     
-    // Gallery data
-    const images = [
-        "https://picsum.photos/id/1015/600/400",
-        "https://picsum.photos/id/1025/600/400",
-        "https://picsum.photos/id/1035/600/400",
-        "https://picsum.photos/id/1045/600/400",
-        "https://picsum.photos/id/1055/600/400",
-        "https://picsum.photos/id/1065/600/400",
-    ];
+    // Gallery data from Laravel props
+    const galleryData = @json($galleries);
+    const images = [];
+    
+    // Process gallery data to extract images
+    if (galleryData && galleryData.length > 0) {
+        galleryData.forEach(gallery => {
+            if (gallery.images && Array.isArray(gallery.images)) {
+                gallery.images.forEach(image => {
+                    if (image && typeof image === 'string') {
+                        // Handle both relative and absolute URLs
+                        let imageUrl = image;
+                        if (!image.startsWith('http') && !image.startsWith('/')) {
+                            imageUrl = '/storage/' + image;
+                        } else if (image.startsWith('/')) {
+                            imageUrl = window.location.origin + image;
+                        }
+                        images.push(imageUrl);
+                    }
+                });
+            }
+        });
+    }
+    
+    // Fallback images if no gallery data
+    if (images.length === 0) {
+        images.push(
+            "https://picsum.photos/id/1015/600/400",
+            "https://picsum.photos/id/1025/600/400",
+            "https://picsum.photos/id/1035/600/400",
+            "https://picsum.photos/id/1045/600/400",
+            "https://picsum.photos/id/1055/600/400",
+            "https://picsum.photos/id/1065/600/400"
+        );
+    }
     
     let currentIndex = 0;
     let touchStartX = 0;
@@ -118,7 +167,19 @@ document.addEventListener('DOMContentLoaded', function() {
         [...images, ...images].forEach((img, index) => {
             const div = document.createElement('div');
             div.className = 'w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex-shrink-0 cursor-pointer';
-            div.innerHTML = `<img src="${img}" class="w-full h-32 sm:h-40 md:h-48 lg:h-56 object-cover rounded-lg shadow-lg hover:opacity-80 transition-all duration-300">`;
+            
+            const imgElement = document.createElement('img');
+            imgElement.className = 'w-full h-32 sm:h-40 md:h-48 lg:h-56 object-cover rounded-lg shadow-lg hover:opacity-80 transition-all duration-300';
+            imgElement.src = img;
+            imgElement.alt = `Gallery Image ${(index % images.length) + 1}`;
+            
+            // Add error handling for broken images
+            imgElement.onerror = function() {
+                console.warn('Failed to load image:', img);
+                this.src = 'https://picsum.photos/600/400?random=' + (index % images.length + 1);
+            };
+            
+            div.appendChild(imgElement);
             div.addEventListener('click', () => openLightbox(index % images.length));
             slider.appendChild(div);
         });
@@ -162,6 +223,14 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Opening lightbox for image', index);
         currentIndex = index;
         lightboxImage.src = images[currentIndex];
+        lightboxImage.alt = `Gallery Image ${currentIndex + 1}`;
+        
+        // Add error handling for lightbox image
+        lightboxImage.onerror = function() {
+            console.warn('Failed to load lightbox image:', images[currentIndex]);
+            this.src = 'https://picsum.photos/600/400?random=' + (currentIndex + 1);
+        };
+        
         lightboxOverlay.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
         updateMobileDots();
@@ -179,6 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function nextImage() {
         currentIndex = (currentIndex + 1) % images.length;
         lightboxImage.src = images[currentIndex];
+        lightboxImage.alt = `Gallery Image ${currentIndex + 1}`;
         updateMobileDots();
         updateCounter();
     }
@@ -187,6 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function prevImage() {
         currentIndex = (currentIndex - 1 + images.length) % images.length;
         lightboxImage.src = images[currentIndex];
+        lightboxImage.alt = `Gallery Image ${currentIndex + 1}`;
         updateMobileDots();
         updateCounter();
     }
@@ -195,6 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function setCurrentIndex(index) {
         currentIndex = index;
         lightboxImage.src = images[currentIndex];
+        lightboxImage.alt = `Gallery Image ${currentIndex + 1}`;
         updateMobileDots();
         updateCounter();
     }

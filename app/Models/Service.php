@@ -15,7 +15,7 @@ class Service extends Model
     ];
 
     protected $fillable = [
-        'title', 'description', 'key_features', 'image', 'is_active'
+        'title', 'subtitle', 'description', 'key_features', 'image', 'is_active'
     ];
 }
 

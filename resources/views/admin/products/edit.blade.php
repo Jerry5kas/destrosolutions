@@ -11,6 +11,15 @@
                 @enderror
             </div>
             <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Subtitle</label>
+                <input name="subtitle" value="{{ old('subtitle', $product->subtitle) }}" class="input-field {{ $errors->has('subtitle') ? 'input-error' : '' }}" placeholder="Enter product subtitle" />
+                @error('subtitle')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                @enderror
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Image</label>
                 @if($product->image)
                     <div class="mb-3">

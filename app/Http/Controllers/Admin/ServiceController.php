@@ -24,6 +24,7 @@ class ServiceController extends Controller
     {
         $data = $request->validate([
             'title' => ['required','string','max:255'],
+            'subtitle' => ['nullable','string','max:255'],
             'description' => ['nullable','string'],
             'key_features' => ['nullable','array'],
             'key_features.*' => ['nullable','string','max:255'],
@@ -47,6 +48,7 @@ class ServiceController extends Controller
     {
         $data = $request->validate([
             'title' => ['required','string','max:255'],
+            'subtitle' => ['nullable','string','max:255'],
             'description' => ['nullable','string'],
             'key_features' => ['nullable','array'],
             'key_features.*' => ['nullable','string','max:255'],
