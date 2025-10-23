@@ -9,11 +9,12 @@
             transform hover:scale-95
             shadow-[0_0_15px_8px_rgba(0,0,0,0.08),0_0_40px_15px_rgba(0,0,0,0.04)] hover:shadow-none rounded-sm">
 
-        <!-- Image -->
+        <!-- Dynamic Image -->
         <img
-            src="{{asset('images/car1.jpg')}}"
-            alt="Gallery Image"
-            class="w-full h-full object-cover scale-100 group-hover:scale-125 transition-transform duration-700 ease-in-out">
+            src="{{ $src ?: asset('images/car1.jpg') }}"
+            alt="{{ $title }}"
+            class="w-full h-full object-cover scale-100 group-hover:scale-125 transition-transform duration-700 ease-in-out"
+            onerror="this.src='{{ asset('images/car1.jpg') }}'">
 
         <!-- Overlay -->
         <div

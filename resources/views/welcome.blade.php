@@ -5,7 +5,7 @@
         </div>
 
         <div data-reveal data-gsap-reveal data-gsap-direction="up" data-gsap-delay="0.2">
-            <x-partials.about />
+            <x-partials.about :servicesBySubtitle="$servicesBySubtitle" />
         </div>
 
         <div class="border border-t border-b border-gray-300 py-6 sm:py-10 md:py-16 lg:py-20 my-6 sm:my-10 md:my-16 lg:my-20 bg-blue-700" data-reveal data-gsap-reveal data-gsap-direction="up" data-gsap-delay="0.4">

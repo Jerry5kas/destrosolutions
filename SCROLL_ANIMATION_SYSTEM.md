@@ -617,3 +617,5 @@ if (isMobile) {
 *This documentation serves as the complete foundation for implementing the global scroll animation system. Keep this as a reference throughout the development process and update it as the system evolves.*
 
 
+
+
