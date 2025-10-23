@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Service;
+use App\Models\Product;
+use App\Models\Faq;
+use App\Models\BlogPost;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -40,9 +43,28 @@ class HomeController extends Controller
                 return $services->take(6); // Limit to 6 services per category
             });
 
+        // Get products for products section
+        $products = Product::where('is_active', true)
+            ->take(8)
+            ->get();
+
+        // Get FAQs for FAQ section
+        $faqs = Faq::active()
+            ->ordered()
+            ->take(8)
+            ->get();
+
+        // Get blog posts for news section
+        $blogPosts = BlogPost::where('is_active', true)
+            ->take(3)
+            ->get();
+
         return view('welcome', [
             'slides' => $slides,
-            'servicesBySubtitle' => $servicesBySubtitle
+            'servicesBySubtitle' => $servicesBySubtitle,
+            'products' => $products,
+            'faqs' => $faqs,
+            'blogPosts' => $blogPosts
         ]);
     }
 }

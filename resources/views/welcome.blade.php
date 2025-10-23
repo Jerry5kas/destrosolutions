@@ -36,13 +36,13 @@
             <x-partials.info />
         </div>
         <div data-reveal data-gsap-reveal data-gsap-direction="up" data-gsap-delay="0.4">
-            <x-partials.products />
+            <x-partials.products :products="$products" />
         </div>
         <div data-reveal data-gsap-reveal data-gsap-direction="right" data-gsap-delay="0.5">
-            <x-partials.faq />
+            <x-partials.faq :faqs="$faqs" />
         </div>
         <div data-reveal data-gsap-reveal data-gsap-direction="up" data-gsap-delay="0.6">
-            <x-partials.news />
+            <x-partials.news :blogPosts="$blogPosts" />
         </div>
         <div data-reveal data-gsap-reveal data-gsap-direction="up" data-gsap-delay="0.7">
             <x-partials.team />

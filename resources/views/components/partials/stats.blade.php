@@ -6,52 +6,15 @@
 ])
 
 <div
-    x-data="{
-        count: 0,
-        finalCount: {{ preg_replace('/[^0-9]/', '', $count) }}, // extract only digits
-        suffix: '{{ trim(preg_replace('/[0-9]/', '', $count)) }}',
-        duration: 4500, // slower: 4.5 seconds
-        easing(t) { // ease-out cubic for smooth deceleration
-            t = Math.min(Math.max(t, 0), 1);
-            return 1 - Math.pow(1 - t, 3);
-        },
-        hasAnimated: false,
-        start() {
-            if (this.hasAnimated) return;
-            this.hasAnimated = true;
-            const startTime = performance.now();
-            const animate = (currentTime) => {
-                const linear = Math.min((currentTime - startTime) / this.duration, 1);
-                const eased = this.easing(linear);
-                this.count = Math.round(eased * this.finalCount);
-                if (linear < 1) requestAnimationFrame(animate);
-            };
-            requestAnimationFrame(animate);
-        },
-        init() {
-            // Trigger animation when visible
-            if ('IntersectionObserver' in window) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            this.start();
-                            observer.disconnect();
-                        }
-                    });
-                }, { threshold: 0.3 });
-                observer.observe(this.$el);
-            } else {
-                this.start();
-            }
-        }
-    }"
-    x-init="init()"
     class="text-center w-full space-y-1 xs:space-y-2 sm:space-y-3 md:space-y-4 {{ $border }}"
     data-reveal
+    data-stats-counter
+    data-final-count="{{ preg_replace('/[^0-9]/', '', $count) }}"
+    data-suffix="{{ trim(preg_replace('/[0-9]/', '', $count)) }}"
 >
     <!-- Animated Count -->
     <div class="font-inter text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold">
-        <span class="text-white" x-text="count"></span><span  class="text-white" x-text="suffix"></span><span class="text-gray-200"> {{ $text }}</span>
+        <span class="text-white stats-count">0</span><span class="text-white stats-suffix">{{ trim(preg_replace('/[0-9]/', '', $count)) }}</span><span class="text-gray-200"> {{ $text }}</span>
     </div>
 
     <!-- Tag -->
@@ -59,3 +22,84 @@
         {{ $tag }}
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Clean counter animation implementation
+    class CounterAnimation {
+        constructor(element) {
+            this.element = element;
+            this.countElement = element.querySelector('.stats-count');
+            this.suffixElement = element.querySelector('.stats-suffix');
+            this.finalCount = parseInt(element.dataset.finalCount) || 0;
+            this.suffix = element.dataset.suffix || '';
+            this.duration = 3000; // 3 seconds
+            this.hasAnimated = false;
+            this.startTime = null;
+            
+            this.init();
+        }
+
+        init() {
+            // Use Intersection Observer for better performance
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !this.hasAnimated) {
+                            this.start();
+                            observer.disconnect();
+                        }
+                    });
+                }, { 
+                    threshold: 0.3,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+                
+                observer.observe(this.element);
+            } else {
+                // Fallback for older browsers
+                this.start();
+            }
+        }
+
+        start() {
+            if (this.hasAnimated) return;
+            this.hasAnimated = true;
+            this.startTime = performance.now();
+            
+            this.animate();
+        }
+
+        animate() {
+            const currentTime = performance.now();
+            const elapsed = currentTime - this.startTime;
+            const progress = Math.min(elapsed / this.duration, 1);
+            
+            // Smooth easing function (ease-out cubic)
+            const easedProgress = this.easeOutCubic(progress);
+            const currentCount = Math.round(easedProgress * this.finalCount);
+            
+            // Update the display
+            this.countElement.textContent = currentCount;
+            
+            // Continue animation if not complete
+            if (progress < 1) {
+                requestAnimationFrame(() => this.animate());
+            } else {
+                // Ensure final count is exact
+                this.countElement.textContent = this.finalCount;
+            }
+        }
+
+        easeOutCubic(t) {
+            return 1 - Math.pow(1 - t, 3);
+        }
+    }
+
+    // Initialize all counter animations
+    const counterElements = document.querySelectorAll('[data-stats-counter]');
+    counterElements.forEach(element => {
+        new CounterAnimation(element);
+    });
+});
+</script>
