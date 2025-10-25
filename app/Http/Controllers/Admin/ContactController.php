@@ -13,6 +13,11 @@ class ContactController extends Controller
         return view('admin.contacts.index', compact('contacts'));
     }
 
+    public function show(Contact $contact)
+    {
+        return view('admin.contacts.show', compact('contact'));
+    }
+
     public function destroy(Contact $contact)
     {
         $contact->delete();

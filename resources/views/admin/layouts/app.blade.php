@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'Admin' }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -425,21 +426,150 @@
                     <div class="text-white font-semibold">{{ $header ?? 'Dashboard' }}</div>
                 </div>
 
-                <!-- User Menu -->
-                <div class="flex items-center gap-3" x-data="{ userMenuOpen: false }">
-                    <div class="flex items-center gap-2 text-sm text-white/80">
-                        <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                            {{ substr(auth('admin')->user()->name ?? 'A', 0, 1) }}
-                        </div>
-                        <span class="hidden md:block">{{ auth('admin')->user()->name ?? '' }}</span>
+                <!-- Right Side Actions -->
+                <div class="flex items-center justify-end gap-3 h-16 flex-nowrap">
+                    <!-- Notifications -->
+                    <div class="relative flex items-center" x-data="notificationSystem()">
+                        <button @click="toggleNotifications()" 
+                                class="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-lg transition-colors relative flex items-center justify-center h-10 min-w-10">
+                            <!-- Clean Bell Icon -->
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            </svg>
+                            <!-- Notification Badge -->
+                            <span x-show="unreadCount > 0" 
+                                  x-text="unreadCount > 99 ? '99+' : unreadCount"
+                                  class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold animate-pulse"></span>
+                        </button>
+
+                        <!-- Notifications Dropdown -->
+                        <div x-show="showNotifications" 
+                             @click.away="showNotifications = false"
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 scale-95 translate-y-2"
+                             x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                             x-transition:leave="transition ease-in duration-150"
+                             x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                             x-transition:leave-end="opacity-0 scale-95 translate-y-2"
+                             class="absolute top-full right-0 mt-2 w-96 bg-white rounded-xl shadow-2xl border border-gray-200 z-50 max-h-[80vh] overflow-hidden">
+                            <!-- Header -->
+                            <div class="px-6 py-4 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-purple-50">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-gray-900">Notifications</h3>
+                                            <p class="text-sm text-gray-600" x-text="unreadCount + ' unread'"></p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button @click="markAllAsRead()" 
+                                                x-show="unreadCount > 0"
+                                                class="text-xs text-blue-600 hover:text-blue-800 font-medium px-3 py-1 rounded-md hover:bg-blue-100 transition-colors">
+                                            Mark all read
+                                        </button>
+                                        <button @click="refreshNotifications()" 
+                                                class="text-xs text-gray-500 hover:text-gray-700 p-1 rounded-md hover:bg-gray-100 transition-colors">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Notifications List -->
+                            <div class="max-h-96 overflow-y-auto">
+                                <template x-for="notification in notifications" :key="notification.id">
+                                    <div class="px-6 py-4 border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer group"
+                                         :class="{ 'bg-blue-50 border-l-4 border-l-blue-500': !notification.is_read }"
+                                         @click="handleNotificationClick(notification)">
+                                        <div class="flex items-start gap-3">
+                                            <!-- Notification Icon -->
+                                            <div class="flex-shrink-0 mt-1">
+                                                <div class="w-8 h-8 rounded-full flex items-center justify-center"
+                                                     :class="notification.type === 'contact_form' ? 'bg-green-100' : 'bg-blue-100'">
+                                                    <svg x-show="notification.type === 'contact_form'" class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                                    </svg>
+                                                    <svg x-show="notification.type !== 'contact_form'" class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Notification Content -->
+                                            <div class="flex-1 min-w-0">
+                                                <div class="flex items-center gap-2 mb-1">
+                                                    <h4 class="text-sm font-semibold text-gray-900 truncate" x-text="notification.title"></h4>
+                                                    <span x-show="!notification.is_read" 
+                                                          class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0 animate-pulse"></span>
+                                                </div>
+                                                <p class="text-xs text-gray-600 mb-2 line-clamp-2" x-text="notification.message"></p>
+                                                <div class="flex items-center justify-between">
+                                                    <p class="text-xs text-gray-400" x-text="formatDate(notification.created_at)"></p>
+                                                    <button @click.stop="markAsRead(notification.id)" 
+                                                            x-show="!notification.is_read"
+                                                            class="text-xs text-blue-600 hover:text-blue-800 font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                                                        Mark read
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Arrow Icon -->
+                                            <div class="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                                
+                                <!-- Empty State -->
+                                <div x-show="notifications.length === 0" class="px-6 py-12 text-center">
+                                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                        </svg>
+                                    </div>
+                                    <h4 class="text-sm font-medium text-gray-900 mb-1">No notifications</h4>
+                                    <p class="text-xs text-gray-500">You're all caught up!</p>
+                                </div>
+                            </div>
+
+                            <!-- Footer -->
+                            <div x-show="notifications.length > 0" class="px-6 py-3 border-t border-gray-100 bg-gray-50">
+                                <a href="{{ route('admin.contacts.index') }}" 
+                                   class="text-xs text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1">
+                                    View all contacts
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
                     </div>
 
-                    <button @click="userMenuOpen = !userMenuOpen"
-                            class="p-1 text-white/70 hover:text-white transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
-                    </button>
+                    <!-- User Menu -->
+                    <div class="relative flex items-center" x-data="{ userMenuOpen: false }">
+                        <button @click="userMenuOpen = !userMenuOpen"
+                                class="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10 h-10">
+                            <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                                {{ substr(auth('admin')->user()->name ?? 'A', 0, 1) }}
+                            </div>
+                            <span class="hidden md:block">{{ auth('admin')->user()->name ?? '' }}</span>
+                            <!-- Clean Chevron Down Icon -->
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
 
                     <!-- User Dropdown -->
                     <div x-show="userMenuOpen"
@@ -455,24 +585,24 @@
                             <div class="text-sm font-medium text-gray-900">{{ auth('admin')->user()->name ?? '' }}</div>
                             <div class="text-xs text-gray-500">{{ auth('admin')->user()->email ?? '' }}</div>
                         </div>
-                        <a href="#" class="flex items-center px-4 py-2 text-sm text-white/80 hover:bg-white/5">
-                            <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                            <svg class="w-4 h-4 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
                             Profile
                         </a>
-                        <a href="#" class="flex items-center px-4 py-2 text-sm text-white/80 hover:bg-white/5">
-                            <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                            <svg class="w-4 h-4 mr-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
                             Settings
                         </a>
-                        <div class="border-t border-white/10 mt-1"></div>
+                        <div class="border-t border-gray-200 mt-1"></div>
                         <form method="POST" action="{{ route('admin.logout') }}" class="block">
                             @csrf
-                            <button type="submit" class="w-full flex items-center px-4 py-2 text-sm text-red-400 hover:bg-white/5">
-                                <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <button type="submit" class="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors">
+                                <svg class="w-4 h-4 mr-3 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                                 </svg>
                                 Logout
@@ -599,6 +729,149 @@
         }
       };
     });
+
+    // Enhanced Notification System
+    function notificationSystem() {
+        return {
+            notifications: [],
+            unreadCount: 0,
+            showNotifications: false,
+            refreshInterval: null,
+
+            init() {
+                this.loadNotifications();
+                this.startAutoRefresh();
+            },
+
+            getCSRFToken() {
+                return document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+            },
+
+            async loadNotifications() {
+                try {
+                    const response = await fetch('/admin/notifications');
+                    const data = await response.json();
+                    this.notifications = data.notifications.data || [];
+                    this.unreadCount = data.unreadCount || 0;
+                } catch (error) {
+                    console.error('Failed to load notifications:', error);
+                }
+            },
+
+            async refreshNotifications() {
+                await this.loadNotifications();
+            },
+
+            async handleNotificationClick(notification) {
+                try {
+                    // Mark as read and get redirect URL
+                    const response = await fetch(`/admin/notifications/${notification.id}/read`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': this.getCSRFToken(),
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        // Update local state
+                        notification.is_read = true;
+                        notification.read_at = new Date().toISOString();
+                        this.unreadCount = Math.max(0, this.unreadCount - 1);
+                        
+                        // Redirect if URL provided
+                        if (result.redirect_url) {
+                            window.location.href = result.redirect_url;
+                        }
+                    } else {
+                        console.error('Failed to mark notification as read:', response.status);
+                    }
+                } catch (error) {
+                    console.error('Error handling notification click:', error);
+                }
+            },
+
+            async markAsRead(notificationId) {
+                try {
+                    const response = await fetch(`/admin/notifications/${notificationId}/read`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': this.getCSRFToken(),
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Update local state
+                        const notification = this.notifications.find(n => n.id === notificationId);
+                        if (notification) {
+                            notification.is_read = true;
+                            notification.read_at = new Date().toISOString();
+                        }
+                        this.unreadCount = Math.max(0, this.unreadCount - 1);
+                    } else {
+                        console.error('Failed to mark notification as read:', response.status);
+                    }
+                } catch (error) {
+                    console.error('Failed to mark notification as read:', error);
+                }
+            },
+
+            async markAllAsRead() {
+                try {
+                    const response = await fetch('/admin/notifications/mark-all-read', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': this.getCSRFToken(),
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Update local state
+                        this.notifications.forEach(notification => {
+                            notification.is_read = true;
+                            notification.read_at = new Date().toISOString();
+                        });
+                        this.unreadCount = 0;
+                    } else {
+                        console.error('Failed to mark all notifications as read:', response.status);
+                    }
+                } catch (error) {
+                    console.error('Failed to mark all notifications as read:', error);
+                }
+            },
+
+            toggleNotifications() {
+                this.showNotifications = !this.showNotifications;
+                if (this.showNotifications) {
+                    this.refreshNotifications();
+                }
+            },
+
+            startAutoRefresh() {
+                // Refresh notifications every 30 seconds
+                this.refreshInterval = setInterval(() => {
+                    this.loadNotifications();
+                }, 30000);
+            },
+
+            formatDate(dateString) {
+                const date = new Date(dateString);
+                const now = new Date();
+                const diffInMinutes = Math.floor((now - date) / (1000 * 60));
+
+                if (diffInMinutes < 1) return 'Just now';
+                if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
+                if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`;
+                return date.toLocaleDateString();
+            }
+        }
+    }
     </script>
 </body>
 </html>

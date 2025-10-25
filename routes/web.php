@@ -1,10 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\NotificationController;
 
 Route::get('/', [HomeController::class, 'index']);
+
+// Contact form submission
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Notification routes
+Route::prefix('admin/notifications')->group(function () {
+    Route::get('/', [NotificationController::class, 'index'])->name('admin.notifications.index');
+    Route::post('/{id}/read', [NotificationController::class, 'markAsRead'])->name('admin.notifications.read');
+    Route::post('/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('admin.notifications.mark-all-read');
+    Route::get('/unread-count', [NotificationController::class, 'getUnreadCount'])->name('admin.notifications.unread-count');
+});
 
 // Public content routes
 Route::get('/quantum', [ContentController::class, 'quantum'])->name('quantum');
@@ -47,7 +61,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::resource('categories', \App\Http\Controllers\Admin\BlogCategoryController::class)->except(['show']);
             Route::resource('posts', \App\Http\Controllers\Admin\BlogPostController::class)->except(['show']);
         });
-        Route::resource('contacts', \App\Http\Controllers\Admin\ContactController::class)->only(['index','destroy']);
+        Route::resource('contacts', \App\Http\Controllers\Admin\ContactController::class)->only(['index','show','destroy']);
         
         // New content management resources
         Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class)->except(['show']);

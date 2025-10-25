@@ -26,15 +26,15 @@
       <div class="hero-content relative z-20 max-w-sm sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 md:px-8 flex flex-col justify-center items-center gap-y-4 sm:gap-y-6 md:gap-y-8">
         
         <!-- Title with Block Letters -->
-        <h1 class="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-sans leading-tight text-center">
+        <h1 class="hero-title text-3xl sm:text-4xl md:text-5xl font-bold font-sans leading-tight text-center">
           <span class="title-text">{{ $slide['title'] }}</span>
         </h1>
         
         <!-- Subtitle -->
-        <p class="hero-subtitle text-white text-sm sm:text-lg md:text-xl leading-relaxed max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl text-center px-2">{{ $slide['subtitle'] }}</p>
+        <p class="hero-subtitle text-white text-sm sm:text-lg md:text-xl leading-relaxed max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl text-center px-2 font-bold">{{ $slide['subtitle'] }}</p>
         
         <!-- Continuous Gradient Button -->
-        <button class="hero-button gradient-button text-white font-semibold max-w-max py-3 px-6 sm:py-4 sm:px-8 md:py-4 md:px-10 text-sm sm:text-base rounded-full shadow-lg hover:shadow-xl group">
+        <button class="hero-button gradient-button text-white font-semibold max-w-max py-3 px-6 sm:py-4 sm:px-8 md:py-4 md:px-10 text-sm sm:text-base shadow-lg hover:shadow-xl group">
           <!-- Button Content -->
           <div class="button-content relative z-10 flex items-center gap-2">
             <!-- SVG Icon -->
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   let currentSlide = 0;
   let slideInterval = null;
-  const slideDuration = 5000; // 5 seconds
+  const slideDuration = 4000; // 4 seconds
 
   // Simple loading sequence
   function initHero() {

@@ -1,12 +1,24 @@
 <x-admin-layout :title="'Contacts'" :header="'Contacts'">
     <div x-data="{ 
         loading: false,
+        showMessage: false,
+        selectedContact: null,
         init() {
             // Show loading on page load
             this.loading = true;
             setTimeout(() => {
                 this.loading = false;
             }, 1000);
+        },
+        viewContact(contact) {
+            this.selectedContact = {
+                name: contact.name,
+                email: contact.email,
+                phone: contact.phone,
+                message: contact.message,
+                date: contact.created_at
+            };
+            this.showMessage = true;
         }
     }">
         <div class="flex justify-between items-center mb-6">
@@ -40,7 +52,7 @@
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach($contacts as $index => $item)
                                     <tr class="hover:bg-gray-50 {{ $index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50' }}" 
-                                        x-data="{ showActions: false, showMessage: false }"
+                                        x-data="{ showActions: false }"
                                         @mouseenter="showActions = true"
                                         @mouseleave="showActions = false">
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -61,17 +73,22 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $item->created_at->format('M d, Y') }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div class="flex items-center justify-end gap-2" x-show="showActions" x-transition>
-                                                <button @click="showMessage = !showMessage" 
-                                                        class="inline-flex items-center px-3 py-1.5 border border-blue-300 rounded-md text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 transition-colors">
-                                                    <x-icons name="eye" size="w-3 h-3" class="mr-1" />
+                                                <a href="{{ route('admin.contacts.show', $item) }}" 
+                                                   class="inline-flex items-center px-3 py-1.5 border border-blue-300 rounded-md text-xs font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 transition-colors">
+                                                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                                    </svg>
                                                     View
-                                                </button>
+                                                </a>
                                                 <form method="POST" action="{{ route('admin.contacts.destroy', $item) }}" class="inline" onsubmit="return confirm('Are you sure you want to delete this message?')">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" 
                                                             class="inline-flex items-center px-3 py-1.5 border border-red-300 rounded-md text-xs font-medium text-red-700 bg-red-50 hover:bg-red-100 transition-colors">
-                                                        <x-icons name="delete" size="w-3 h-3" class="mr-1" />
+                                                        <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                                        </svg>
                                                         Delete
                                                     </button>
                                                 </form>
@@ -90,36 +107,6 @@
                     </div>
                 @endif
                 
-                <!-- Message Modal -->
-                <div x-show="showMessage" 
-                     x-transition:enter="transition ease-out duration-100"
-                     x-transition:enter-start="opacity-0 scale-95"
-                     x-transition:enter-end="opacity-100 scale-100"
-                     x-transition:leave="transition ease-in duration-75"
-                     x-transition:leave-start="opacity-100 scale-100"
-                     x-transition:leave-end="opacity-0 scale-95"
-                     class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-                     @click.self="showMessage = false">
-                    <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Contact Message</h3>
-                        <div class="space-y-3">
-                            @foreach($contacts as $contact)
-                                <div x-show="showMessage" style="display: none;">
-                                    <div><strong>Name:</strong> {{ $contact->name }}</div>
-                                    <div><strong>Email:</strong> {{ $contact->email }}</div>
-                                    @if($contact->phone)
-                                        <div><strong>Phone:</strong> {{ $contact->phone }}</div>
-                                    @endif
-                                    <div><strong>Message:</strong></div>
-                                    <div class="text-gray-700 bg-gray-50 p-3 rounded">{{ $contact->message }}</div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <button @click="showMessage = false" class="mt-4 w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                            Close
-                        </button>
-                    </div>
-                </div>
             @else
                 <div class="text-center py-12">
                     <div class="mx-auto w-24 h-24 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mb-4">
