@@ -164,6 +164,62 @@
             position: relative;
             overflow: hidden;
         }
+        
+        /* Quill Editor Styles */
+        .ql-container {
+            min-height: 300px;
+            font-family: 'Inter', sans-serif;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-top: none;
+            border-radius: 0 0 0.5rem 0.5rem;
+        }
+        
+        .ql-toolbar {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+        
+        .ql-editor {
+            min-height: 300px;
+            max-height: 600px;
+            overflow-y: auto;
+            color: #1f2937 !important;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .ql-editor p,
+        .ql-editor ol,
+        .ql-editor ul,
+        .ql-editor pre,
+        .ql-editor blockquote,
+        .ql-editor h1,
+        .ql-editor h2,
+        .ql-editor h3,
+        .ql-editor h4,
+        .ql-editor h5,
+        .ql-editor h6 {
+            color: #1f2937 !important;
+        }
+        
+        .ql-editor a {
+            color: #3b82f6 !important;
+            text-decoration: underline;
+        }
+        
+        .ql-editor::before {
+            color: #9ca3af !important;
+        }
+        
+        .ql-stroke {
+            stroke: #4b5563;
+        }
+        
+        .ql-fill {
+            fill: #4b5563;
+        }
     </style>
 </head>
 <body class="dark-glass-bg min-h-screen text-white">
@@ -873,6 +929,8 @@
         }
     }
     </script>
+    
+    @stack('scripts')
 </body>
 </html>
 
