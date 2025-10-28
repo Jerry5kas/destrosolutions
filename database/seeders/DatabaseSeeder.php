@@ -34,6 +34,8 @@ class DatabaseSeeder extends Seeder
             QuantumSeeder::class,
             GallerySeeder::class,
             ServiceSeeder::class,
+            ProductSeeder::class,
+            TrainingSeeder::class,
         ]);
     }
 }
